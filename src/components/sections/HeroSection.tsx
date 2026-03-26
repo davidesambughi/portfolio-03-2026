@@ -1,10 +1,12 @@
 'use client'
 
+import { motion } from 'framer-motion'
+
 export function HeroSection() {
   return (
     <section
       id="hero"
-      className="flex items-center"
+      className="flex flex-col"
       style={{ backgroundImage: 'var(--gradient-hero)' }}
     >
       <div className="px-12 pt-20 pb-14 max-w-2xl">
@@ -12,7 +14,6 @@ export function HeroSection() {
         {/* ── Badge ── */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full
                         border border-emerald-500/40 bg-emerald-500/6 mb-7">
-          {/* Status dot with pulse ring */}
           <span className="relative flex h-2 w-2 shrink-0">
             <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 animate-ping" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -63,6 +64,24 @@ export function HeroSection() {
         </div>
 
       </div>
+
+      {/* ── Scroll indicator ── */}
+      <div className="px-12 pb-8 flex items-center gap-3">
+        <span className="text-[9px] font-medium tracking-[0.18em] uppercase text-muted-foreground/35 shrink-0">
+          Scroll to explore
+        </span>
+
+        {/* Track — w-32 = 128px, segment = 1/5 = ~26px */}
+        <div className="relative w-32 h-px bg-border overflow-hidden">
+          <motion.div
+            className="absolute top-0 left-0 h-full w-1/5 rounded-full"
+            style={{ backgroundImage: 'var(--gradient-brand-h)' }}
+            animate={{ x: ['-100%', '500%'] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.4 }}
+          />
+        </div>
+      </div>
+
     </section>
   )
 }
