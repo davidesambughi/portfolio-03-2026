@@ -4,41 +4,582 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ════════════════════════════════════════════════════════
+   PALETTE PRIMITIVA — OKLCH(Lightness Chroma Hue)
+   L: 0–1  |  C: 0–0.37  |  H: 0–360°
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Violet — brand primario (H: 274°) ── */
+  --violet-50:  oklch(0.975 0.018 274);
+  --violet-100: oklch(0.95  0.042 274);
+  --violet-200: oklch(0.9   0.085 274);
+  --violet-300: oklch(0.82  0.155 274);
+  --violet-400: oklch(0.70  0.220 274);
+  --violet-500: oklch(0.585 0.275 274);
+  --violet-600: oklch(0.495 0.265 274);
+  --violet-700: oklch(0.40  0.220 274);
+  --violet-800: oklch(0.31  0.165 274);
+  --violet-900: oklch(0.23  0.105 274);
+  --violet-950: oklch(0.16  0.060 274);
+
+  /* ── Electric — neon cyan/blue (H: 198°) ── */
+  --electric-50:  oklch(0.978 0.018 198);
+  --electric-100: oklch(0.955 0.048 198);
+  --electric-200: oklch(0.91  0.100 198);
+  --electric-300: oklch(0.855 0.165 198);
+  --electric-400: oklch(0.795 0.215 198);
+  --electric-500: oklch(0.720 0.240 198);
+  --electric-600: oklch(0.615 0.225 198);
+  --electric-700: oklch(0.495 0.190 198);
+  --electric-800: oklch(0.375 0.145 198);
+  --electric-900: oklch(0.270 0.095 198);
+  --electric-950: oklch(0.175 0.055 198);
+
+  /* ── Amber — accento caldo (H: 65°) ── */
+  --amber-50: oklch(0.98 0.015 65);
+  --amber-100: oklch(0.96 0.04 65);
+  --amber-200: oklch(0.92 0.08 65);
+  --amber-300: oklch(0.87 0.13 65);
+  --amber-400: oklch(0.82 0.175 65);
+  --amber-500: oklch(0.75 0.2 65);
+  --amber-600: oklch(0.65 0.19 65);
+  --amber-700: oklch(0.53 0.165 65);
+  --amber-800: oklch(0.41 0.13 65);
+  --amber-900: oklch(0.3 0.09 65);
+  --amber-950: oklch(0.21 0.055 65);
+
+  /* ── Emerald — successo (H: 155°) ── */
+  --emerald-50: oklch(0.978 0.015 155);
+  --emerald-100: oklch(0.955 0.04 155);
+  --emerald-200: oklch(0.91 0.085 155);
+  --emerald-300: oklch(0.84 0.14 155);
+  --emerald-400: oklch(0.735 0.185 155);
+  --emerald-500: oklch(0.625 0.195 155);
+  --emerald-600: oklch(0.52 0.18 155);
+  --emerald-700: oklch(0.415 0.15 155);
+  --emerald-800: oklch(0.32 0.115 155);
+  --emerald-900: oklch(0.235 0.075 155);
+  --emerald-950: oklch(0.16 0.045 155);
+
+  /* ── Coral — distruttivo (H: 25°) ── */
+  --coral-50: oklch(0.978 0.015 25);
+  --coral-100: oklch(0.955 0.04 25);
+  --coral-200: oklch(0.91 0.09 25);
+  --coral-300: oklch(0.84 0.145 25);
+  --coral-400: oklch(0.735 0.21 25);
+  --coral-500: oklch(0.62 0.25 25);
+  --coral-600: oklch(0.51 0.23 25);
+  --coral-700: oklch(0.4 0.19 25);
+  --coral-800: oklch(0.305 0.145 25);
+  --coral-900: oklch(0.225 0.09 25);
+  --coral-950: oklch(0.155 0.055 25);
+
+  /* ── Cyan — informativo (H: 210°) ── */
+  --cyan-50: oklch(0.978 0.015 210);
+  --cyan-100: oklch(0.955 0.04 210);
+  --cyan-200: oklch(0.91 0.085 210);
+  --cyan-300: oklch(0.84 0.135 210);
+  --cyan-400: oklch(0.73 0.175 210);
+  --cyan-500: oklch(0.615 0.2 210);
+  --cyan-600: oklch(0.51 0.185 210);
+  --cyan-700: oklch(0.41 0.155 210);
+  --cyan-800: oklch(0.315 0.115 210);
+  --cyan-900: oklch(0.235 0.075 210);
+  --cyan-950: oklch(0.16 0.045 210);
+
+  /* ── Neutral — grigio leggermente freddo (H: 265°) ── */
+  --neutral-0: oklch(1 0 265);
+  --neutral-50: oklch(0.985 0.002 265);
+  --neutral-100: oklch(0.968 0.003 265);
+  --neutral-200: oklch(0.922 0.005 265);
+  --neutral-300: oklch(0.869 0.007 265);
+  --neutral-400: oklch(0.72 0.009 265);
+  --neutral-500: oklch(0.57 0.009 265);
+  --neutral-600: oklch(0.45 0.008 265);
+  --neutral-700: oklch(0.365 0.006 265);
+  --neutral-800: oklch(0.27 0.005 265);
+  --neutral-900: oklch(0.2 0.004 265);
+  --neutral-950: oklch(0.135 0.003 265);
+  --neutral-1000: oklch(0.07 0.002 265);
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN SEMANTICI — LIGHT MODE
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  /* Superfici */
+  --background: var(--neutral-0);
+  --foreground: var(--neutral-950);
+  --card: var(--neutral-50);
+  --card-foreground: var(--neutral-950);
+  --popover: var(--neutral-0);
+  --popover-foreground: var(--neutral-950);
+
+  /* Primario */
+  --primary: oklch(0.5106 0.230 276.97);
+  --primary-foreground: var(--neutral-0);
+
+  /* Secondario */
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--neutral-900);
+
+  /* Accento — electric blue (sostituisce amber nell'UI) */
+  --accent: var(--electric-600);
+  --accent-foreground: var(--neutral-0);
+
+  /* Muted */
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-500);
+
+  /* Stato */
+  --destructive: var(--coral-500);
+  --success: var(--emerald-500);
+  --warning: var(--amber-600);
+  --info: var(--cyan-500);
+
+  /* Bordi & input */
+  --border: var(--neutral-200);
+  --input: var(--neutral-200);
+  --ring: var(--violet-500);
+
+  /* Grafici — uno per palette */
+  --chart-1: var(--violet-500);
+  --chart-2: var(--amber-500);
+  --chart-3: var(--emerald-500);
+  --chart-4: var(--cyan-500);
+  --chart-5: var(--coral-500);
+
+  /* Sidebar */
+  --sidebar: var(--neutral-0);
+  --sidebar-foreground: var(--neutral-900);
+  --sidebar-primary: oklch(0.5106 0.230 276.97);
+  --sidebar-primary-foreground: var(--neutral-0);
+  --sidebar-accent: var(--neutral-100);
+  --sidebar-accent-foreground: var(--neutral-900);
+  --sidebar-border: var(--neutral-200);
+  --sidebar-ring: var(--violet-500);
+
+  /* Border radius base */
+  --radius: 0.5rem;
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN SEMANTICI — DARK MODE
+   ════════════════════════════════════════════════════════ */
+
+.dark {
+  /* Superfici */
+  --background: var(--neutral-1000);
+  --foreground: var(--neutral-50);
+  --card: var(--neutral-950);
+  --card-foreground: var(--neutral-50);
+  --popover: var(--neutral-950);
+  --popover-foreground: var(--neutral-50);
+
+  /* Primario — vivid violet sul fondo nero */
+  --primary: var(--violet-400);
+  --primary-foreground: var(--neutral-1000);
+
+  /* Secondario */
+  --secondary: var(--neutral-900);
+  --secondary-foreground: var(--neutral-50);
+
+  /* Accento — neon electric cyan */
+  --accent: var(--electric-400);
+  --accent-foreground: var(--neutral-1000);
+
+  /* Muted */
+  --muted: var(--neutral-800);
+  --muted-foreground: var(--neutral-400);
+
+  /* Stato */
+  --destructive: var(--coral-400);
+  --success: var(--emerald-400);
+  --warning: var(--amber-400);
+  --info: var(--cyan-400);
+
+  /* Bordi & input — semitrasparenti sul fondo nero */
+  --border: oklch(0.985 0.002 265 / 9%);
+  --input: oklch(0.985 0.002 265 / 14%);
+  --ring: var(--electric-400);
+
+  /* Grafici */
+  --chart-1: var(--violet-400);
+  --chart-2: var(--electric-400);
+  --chart-3: var(--emerald-400);
+  --chart-4: var(--cyan-400);
+  --chart-5: var(--coral-400);
+
+  /* Sidebar */
+  --sidebar: var(--neutral-950);
+  --sidebar-foreground: var(--neutral-50);
+  --sidebar-primary: var(--violet-400);
+  --sidebar-primary-foreground: var(--neutral-1000);
+  --sidebar-accent: var(--neutral-900);
+  --sidebar-accent-foreground: var(--neutral-50);
+  --sidebar-border: oklch(0.985 0.002 265 / 9%);
+  --sidebar-ring: var(--violet-400);
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN OMBRE
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  --shadow-2xs: 0 1px 2px 0 oklch(0.145 0 0 / 0.04);
+  --shadow-xs:
+    0 1px 3px 0 oklch(0.145 0 0 / 0.06), 0 1px 2px -1px oklch(0.145 0 0 / 0.06);
+  --shadow-sm:
+    0 2px 4px 0 oklch(0.145 0 0 / 0.08), 0 1px 2px -1px oklch(0.145 0 0 / 0.06);
+  --shadow-md:
+    0 4px 8px -2px oklch(0.145 0 0 / 0.1),
+    0 2px 4px -2px oklch(0.145 0 0 / 0.06);
+  --shadow-lg:
+    0 8px 16px -4px oklch(0.145 0 0 / 0.12),
+    0 4px 6px -4px oklch(0.145 0 0 / 0.06);
+  --shadow-xl:
+    0 16px 32px -6px oklch(0.145 0 0 / 0.14),
+    0 8px 12px -4px oklch(0.145 0 0 / 0.06);
+  --shadow-2xl: 0 24px 48px -8px oklch(0.145 0 0 / 0.18);
+  --shadow-inner: inset 0 2px 4px 0 oklch(0.145 0 0 / 0.06);
+
+  /* Glow colorati */
+  --shadow-glow-primary: 0 0 24px -4px var(--violet-400);
+  --shadow-glow-accent: 0 0 24px -4px var(--amber-400);
+  --shadow-glow-success: 0 0 24px -4px var(--emerald-400);
+}
+
+.dark {
+  --shadow-2xs: 0 1px 2px 0 oklch(0 0 0 / 0.25);
+  --shadow-xs:
+    0 1px 3px 0 oklch(0 0 0 / 0.3), 0 1px 2px -1px oklch(0 0 0 / 0.25);
+  --shadow-sm:
+    0 2px 4px 0 oklch(0 0 0 / 0.35), 0 1px 2px -1px oklch(0 0 0 / 0.25);
+  --shadow-md:
+    0 4px 8px -2px oklch(0 0 0 / 0.4), 0 2px 4px -2px oklch(0 0 0 / 0.25);
+  --shadow-lg:
+    0 8px 16px -4px oklch(0 0 0 / 0.45), 0 4px 6px -4px oklch(0 0 0 / 0.25);
+  --shadow-xl:
+    0 16px 32px -6px oklch(0 0 0 / 0.5), 0 8px 12px -4px oklch(0 0 0 / 0.25);
+  --shadow-2xl: 0 24px 48px -8px oklch(0 0 0 / 0.6);
+  --shadow-inner: inset 0 2px 4px 0 oklch(0 0 0 / 0.2);
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN GRADIENTI & GLOW — LIGHT
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  /* Brand gradient — user-specified purple→blue-violet→indigo (135°) */
+  --gradient-brand:   linear-gradient(135deg, oklch(0.5106 0.230 276.97) 0%, oklch(0.5413 0.247 293.01) 50%, oklch(0.6268 0.233 303.90) 100%);
+  --gradient-brand-r: linear-gradient(135deg, oklch(0.6268 0.233 303.90) 0%, oklch(0.5413 0.247 293.01) 50%, oklch(0.5106 0.230 276.97) 100%);
+  --gradient-brand-v: linear-gradient(180deg, oklch(0.5106 0.230 276.97) 0%, oklch(0.5413 0.247 293.01) 50%, oklch(0.6268 0.233 303.90) 100%);
+  --gradient-brand-h: linear-gradient(90deg,  oklch(0.5106 0.230 276.97) 0%, oklch(0.5413 0.247 293.01) 50%, oklch(0.6268 0.233 303.90) 100%);
+
+  /* Separator gradient */
+  --gradient-sep: linear-gradient(to right,
+    transparent 0%,
+    oklch(0.5106 0.230 276.97 / 0.50) 25%,
+    oklch(0.5413 0.247 293.01 / 0.55) 50%,
+    oklch(0.6268 0.233 303.90 / 0.45) 75%,
+    transparent 100%
+  );
+
+  /* Sidebar tint */
+  --gradient-sidebar: linear-gradient(180deg,
+    oklch(0.5106 0.230 276.97 / 0.07) 0%,
+    oklch(0.5413 0.247 293.01 / 0.09) 50%,
+    oklch(0.6268 0.233 303.90 / 0.05) 100%
+  );
+
+  /* Glow */
+  --glow-primary:   oklch(0.5106 0.230 276.97 / 0.20);
+  --glow-secondary: oklch(0.6268 0.233 303.90 / 0.16);
+
+  /* Hero radial */
+  --gradient-hero: radial-gradient(ellipse 70% 55% at 75% -5%,
+    oklch(0.5106 0.230 276.97 / 0.09) 0%,
+    oklch(0.5413 0.247 293.01 / 0.06) 40%,
+    transparent 70%
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN GRADIENTI & GLOW — DARK (neon)
+   ════════════════════════════════════════════════════════ */
+
+.dark {
+  /* Brand gradient: electric-cyan → vivid-violet */
+  --gradient-brand:    linear-gradient(135deg, var(--electric-400) 0%, var(--violet-400) 100%);
+  --gradient-brand-r:  linear-gradient(135deg, var(--violet-400) 0%, var(--electric-400) 100%);
+  --gradient-brand-v:  linear-gradient(180deg, var(--electric-400) 0%, var(--violet-400) 100%);
+  --gradient-brand-h:  linear-gradient(90deg,  var(--electric-400) 0%, var(--violet-500) 55%, var(--violet-300) 100%);
+
+  /* Separator gradient */
+  --gradient-sep: linear-gradient(to right,
+    transparent 0%,
+    oklch(0.795 0.215 198 / 0.45) 30%,
+    oklch(0.70 0.220 274 / 0.45) 65%,
+    transparent 100%
+  );
+
+  /* Sidebar tint — violet dominant, electric hint al centro */
+  --gradient-sidebar: linear-gradient(180deg,
+    oklch(0.70 0.220 274 / 0.10) 0%,
+    oklch(0.795 0.215 198 / 0.05) 50%,
+    oklch(0.70 0.220 274 / 0.08) 100%
+  );
+
+  /* Glow */
+  --glow-primary:   oklch(0.795 0.215 198 / 0.22);
+  --glow-secondary: oklch(0.70  0.220 274 / 0.18);
+
+  /* Hero radial */
+  --gradient-hero: radial-gradient(ellipse 70% 55% at 75% -5%,
+    oklch(0.795 0.215 198 / 0.12) 0%,
+    oklch(0.70 0.220 274 / 0.08) 40%,
+    transparent 70%
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN ANIMAZIONE
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  /* Durate */
+  --duration-instant: 50ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --duration-slowest: 1000ms;
+
+  /* Curve di easing */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-snappy: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN Z-INDEX
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  --z-below: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-toast: 600;
+  --z-tooltip: 700;
+  --z-top: 999;
+}
+
+/* ════════════════════════════════════════════════════════
+   TOKEN TIPOGRAFIA
+   ════════════════════════════════════════════════════════ */
+
+:root {
+  /* Scale dimensioni (Major Third — ×1.25) */
+  --text-2xs: 0.625rem; /* 10px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
+  --text-6xl: 3.75rem; /* 60px */
+  --text-7xl: 4.5rem; /* 72px */
+  --text-8xl: 6rem; /* 96px */
+
+  /* Interlinea */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Spaziatura lettere */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* Pesi */
+  --weight-thin: 100;
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  --weight-black: 900;
+}
+
+/* ════════════════════════════════════════════════════════
+   BRIDGE TAILWIND v4 — @theme inline
+   Mappa i CSS custom properties alle utility Tailwind
+   ════════════════════════════════════════════════════════ */
+
 @theme inline {
+  /* Font */
+  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --font-heading: var(--font-sans);
+
+  /* Colori — superfici */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Colori — semantici */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Colori — grafici */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Colori — sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Colori — palette Violet */
+  --color-violet-50: var(--violet-50);
+  --color-violet-100: var(--violet-100);
+  --color-violet-200: var(--violet-200);
+  --color-violet-300: var(--violet-300);
+  --color-violet-400: var(--violet-400);
+  --color-violet-500: var(--violet-500);
+  --color-violet-600: var(--violet-600);
+  --color-violet-700: var(--violet-700);
+  --color-violet-800: var(--violet-800);
+  --color-violet-900: var(--violet-900);
+  --color-violet-950: var(--violet-950);
+
+  /* Colori — palette Amber */
+  --color-amber-50: var(--amber-50);
+  --color-amber-100: var(--amber-100);
+  --color-amber-200: var(--amber-200);
+  --color-amber-300: var(--amber-300);
+  --color-amber-400: var(--amber-400);
+  --color-amber-500: var(--amber-500);
+  --color-amber-600: var(--amber-600);
+  --color-amber-700: var(--amber-700);
+  --color-amber-800: var(--amber-800);
+  --color-amber-900: var(--amber-900);
+  --color-amber-950: var(--amber-950);
+
+  /* Colori — palette Emerald */
+  --color-emerald-50: var(--emerald-50);
+  --color-emerald-100: var(--emerald-100);
+  --color-emerald-200: var(--emerald-200);
+  --color-emerald-300: var(--emerald-300);
+  --color-emerald-400: var(--emerald-400);
+  --color-emerald-500: var(--emerald-500);
+  --color-emerald-600: var(--emerald-600);
+  --color-emerald-700: var(--emerald-700);
+  --color-emerald-800: var(--emerald-800);
+  --color-emerald-900: var(--emerald-900);
+  --color-emerald-950: var(--emerald-950);
+
+  /* Colori — palette Coral */
+  --color-coral-50: var(--coral-50);
+  --color-coral-100: var(--coral-100);
+  --color-coral-200: var(--coral-200);
+  --color-coral-300: var(--coral-300);
+  --color-coral-400: var(--coral-400);
+  --color-coral-500: var(--coral-500);
+  --color-coral-600: var(--coral-600);
+  --color-coral-700: var(--coral-700);
+  --color-coral-800: var(--coral-800);
+  --color-coral-900: var(--coral-900);
+  --color-coral-950: var(--coral-950);
+
+  /* Colori — palette Electric (neon cyan, H:198°) */
+  --color-electric-50:  var(--electric-50);
+  --color-electric-100: var(--electric-100);
+  --color-electric-200: var(--electric-200);
+  --color-electric-300: var(--electric-300);
+  --color-electric-400: var(--electric-400);
+  --color-electric-500: var(--electric-500);
+  --color-electric-600: var(--electric-600);
+  --color-electric-700: var(--electric-700);
+  --color-electric-800: var(--electric-800);
+  --color-electric-900: var(--electric-900);
+  --color-electric-950: var(--electric-950);
+
+  /* Colori — palette Cyan */
+  --color-cyan-50: var(--cyan-50);
+  --color-cyan-100: var(--cyan-100);
+  --color-cyan-200: var(--cyan-200);
+  --color-cyan-300: var(--cyan-300);
+  --color-cyan-400: var(--cyan-400);
+  --color-cyan-500: var(--cyan-500);
+  --color-cyan-600: var(--cyan-600);
+  --color-cyan-700: var(--cyan-700);
+  --color-cyan-800: var(--cyan-800);
+  --color-cyan-900: var(--cyan-900);
+  --color-cyan-950: var(--cyan-950);
+
+  /* Colori — palette Neutral */
+  --color-neutral-0: var(--neutral-0);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+  --color-neutral-1000: var(--neutral-1000);
+
+  /* Radius */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -46,76 +587,30 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-full: 9999px;
+
+  /* Ombre custom */
+  --shadow-glow-primary: var(--shadow-glow-primary);
+  --shadow-glow-accent: var(--shadow-glow-accent);
+  --shadow-glow-success: var(--shadow-glow-success);
+
+  /* Gradienti brand (usabili via bg-[var(--gradient-brand)] ecc.) */
+  --gradient-brand:   var(--gradient-brand);
+  --gradient-brand-r: var(--gradient-brand-r);
+  --gradient-brand-v: var(--gradient-brand-v);
+  --gradient-brand-h: var(--gradient-brand-h);
+  --gradient-sep:     var(--gradient-sep);
+  --gradient-sidebar: var(--gradient-sidebar);
+  --gradient-hero:    var(--gradient-hero);
+
+  /* Glow */
+  --glow-primary:   var(--glow-primary);
+  --glow-secondary: var(--glow-secondary);
 }
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
+/* ════════════════════════════════════════════════════════
+   BASE
+   ════════════════════════════════════════════════════════ */
 
 @layer base {
   * {
