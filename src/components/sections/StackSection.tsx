@@ -44,28 +44,28 @@ export function StackSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20px" }}
             transition={{ duration: 0.4, delay: idx * 0.06, ease: [0.4, 0, 0.2, 1] }}
-            className={cn(
-              "group p-6 rounded-xl border border-border bg-card/40 transition-all duration-300",
-              "hover:border-primary/30 hover:bg-card hover:shadow-[0_0_24px_-12px_var(--glow-primary)]"
-            )}
+            className="group p-[1px] rounded-xl overflow-hidden transition-all duration-300"
+            style={{ backgroundImage: 'var(--gradient-brand-h)' }}
           >
-            <h3 className="text-[10px] font-mono tracking-[0.2em] text-muted-foreground/40 mb-5 uppercase">
-              {item.category}
-            </h3>
+            <div className="p-6 rounded-[11px] bg-card/90 h-full transition-all duration-300 group-hover:bg-card">
+              <h3 className="text-[10px] font-mono tracking-[0.2em] text-muted-foreground/40 mb-5 uppercase">
+                {item.category}
+              </h3>
 
-            <div className="flex flex-wrap gap-2">
-              {item.techs.map((tech) => (
-                <span
-                  key={tech}
-                  className={cn(
-                    "px-2.5 py-1 rounded-md text-[11px] font-medium tracking-tight transition-all duration-200",
-                    "bg-muted/40 text-muted-foreground border border-transparent",
-                    "group-hover:text-foreground group-hover:border-border group-hover:bg-muted"
-                  )}
-                >
-                  {tech}
-                </span>
-              ))}
+              <div className="flex flex-wrap gap-2">
+                {item.techs.map((tech) => (
+                  <span
+                    key={tech}
+                    className={cn(
+                      "px-2.5 py-1 rounded-md text-[11px] font-medium tracking-tight transition-all duration-200",
+                      "bg-muted/40 text-muted-foreground border border-transparent",
+                      "group-hover:text-foreground group-hover:border-white/10 group-hover:bg-muted"
+                    )}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.article>
         ))}
