@@ -59,54 +59,60 @@ export function ContactSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="name" className="sr-only">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Name"
-                disabled={isPending}
-                className={cn(
-                  "w-full px-4 py-3 rounded-xl border border-border bg-card/40 outline-none transition-all duration-200",
-                  "focus:border-primary/50 focus:ring-2 focus:ring-primary/10 placeholder:text-muted-foreground/40",
-                  isPending && "opacity-50 cursor-not-allowed"
-                )}
-                required
-              />
+              <div className="rounded-xl p-[1px] overflow-hidden" style={{ backgroundImage: 'var(--gradient-brand-h)' }}>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  disabled={isPending}
+                  className={cn(
+                    "w-full block px-4 py-3 rounded-[11px] bg-card/90 outline-none transition-all duration-200",
+                    "focus:bg-card placeholder:text-muted-foreground/40",
+                    isPending && "opacity-50 cursor-not-allowed"
+                  )}
+                  required
+                />
+              </div>
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="sr-only">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
-                disabled={isPending}
-                className={cn(
-                  "w-full px-4 py-3 rounded-xl border border-border bg-card/40 outline-none transition-all duration-200",
-                  "focus:border-primary/50 focus:ring-2 focus:ring-primary/10 placeholder:text-muted-foreground/40",
-                  isPending && "opacity-50 cursor-not-allowed"
-                )}
-                required
-              />
+              <div className="rounded-xl p-[1px] overflow-hidden" style={{ backgroundImage: 'var(--gradient-brand-h)' }}>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  disabled={isPending}
+                  className={cn(
+                    "w-full block px-4 py-3 rounded-[11px] bg-card/90 outline-none transition-all duration-200",
+                    "focus:bg-card placeholder:text-muted-foreground/40",
+                    isPending && "opacity-50 cursor-not-allowed"
+                  )}
+                  required
+                />
+              </div>
             </div>
           </div>
 
           {/* ── Middle Row: Message ── */}
           <div className="space-y-2">
             <label htmlFor="message" className="sr-only">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Your message..."
-              rows={6}
-              disabled={isPending}
-              className={cn(
-                "w-full px-4 py-3 rounded-xl border border-border bg-card/40 outline-none transition-all duration-200 resize-none",
-                "focus:border-primary/50 focus:ring-2 focus:ring-primary/10 placeholder:text-muted-foreground/40",
-                isPending && "opacity-50 cursor-not-allowed"
-              )}
-              required
-            />
+            <div className="rounded-xl p-[1px] overflow-hidden" style={{ backgroundImage: 'var(--gradient-brand-h)' }}>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Your message..."
+                rows={6}
+                disabled={isPending}
+                className={cn(
+                  "w-full block px-4 py-3 rounded-[11px] bg-card/90 outline-none transition-all duration-200 resize-none",
+                  "focus:bg-card placeholder:text-muted-foreground/40",
+                  isPending && "opacity-50 cursor-not-allowed"
+                )}
+                required
+              />
+            </div>
           </div>
 
           {/* ── Bottom Row: Submit & Socials ── */}
