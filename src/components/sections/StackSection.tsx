@@ -14,19 +14,19 @@ const STACK_DATA = [
   },
   {
     category: 'BACKEND',
-    techs: ['Supabase', 'Vercel', 'Edge'],
+    techs: ['Supabase', 'Drizzle ORM', 'Zod'],
   },
   {
-    category: 'AUTOMATION',
-    techs: ['n8n', 'Resend', 'Stripe'],
+    category: 'PAYMENTS & EMAIL',
+    techs: ['Stripe', 'Resend'],
+  },
+  {
+    category: 'INFRA',
+    techs: ['Vercel', 'PostgreSQL'],
   },
   {
     category: 'SEO / GEO',
-    techs: ['Schema.org', 'llms.txt', 'i18n'],
-  },
-  {
-    category: 'METHODOLOGY',
-    techs: ['Vibe Coding™', 'AI-First'],
+    techs: ['JSON-LD', 'Speakable Schema', 'ISR', 'next-intl', 'llms.txt', 'robots.txt'],
   },
 ]
 

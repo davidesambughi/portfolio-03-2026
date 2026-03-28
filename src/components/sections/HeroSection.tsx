@@ -23,7 +23,7 @@ export function HeroSection() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
             <span className="text-xs font-semibold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase">
-              Available for projects
+              Open to opportunities · Jul 2026
             </span>
           </div>
 
@@ -40,10 +40,11 @@ export function HeroSection() {
 
           {/* Pitch */}
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl">
-            Specializing in{' '}
-            <span className="text-foreground font-medium border-b border-primary/30">Next.js 16</span> and{' '}
-            <span className="text-foreground font-medium border-b border-primary/30">Vibe Coding™</span>
-            {' '}— building high-performance, GEO-optimized web apps that rank, load fast, and convert.
+            ITS full-stack student on a 5-month internship at a{' '}
+            <span className="text-foreground font-medium border-b border-primary/30">Lisbon startup</span>
+            {' '}— building multilingual, GEO-optimized web apps with{' '}
+            <span className="text-foreground font-medium border-b border-primary/30">Next.js 16</span>
+            {' '}and shipping them to production. Career-changer with a business background and no patience for code that doesn't go live.
           </p>
 
           {/* CTAs */}

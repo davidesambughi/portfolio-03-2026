@@ -14,7 +14,7 @@ const PROJECTS = [
     title: 'GetNIF Portugal',
     slug: 'getnifportugal.com',
     image: '/images/getNifPortugal.png',
-    url: 'https://getnifportugal.com',
+    url: 'https://nif-saas-nextjs16.vercel.app/en',
     alt: 'Screenshot of GetNIF Portugal platform',
     description:
       'SaaS platform to obtain a Portuguese NIF remotely — Stripe checkout, signed document uploads, realtime admin dashboard, and trilingual support (EN/PT/FR). No Portugal visit required.',
@@ -24,10 +24,10 @@ const PROJECTS = [
   {
     icon: Globe,
     hue: '293.01',
-    title: 'TrustFamily',
+    title: 'Raising Kids In Portugal',
     slug: 'trustfamily.com',
     image: '/images/NIFSaaS.png',
-    url: 'https://trustfamily.com',
+    url: 'https://raisingkidsinportugal.com',
     alt: 'Screenshot of TrustFamily relocation platform',
     description:
       '77 schools and 64 neighborhoods indexed for expat families relocating to Portugal — ISR across 6 locales, full JSON-LD suite, and speakable schema targeting AI Overviews.',
