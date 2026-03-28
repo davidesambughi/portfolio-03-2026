@@ -11,27 +11,28 @@ const PROJECTS = [
   {
     icon: Building2,
     hue: '276.97',
-    title: '',
-    slug: 'raisingkidsinportugal.com',
-    image: '/images/NIFSaaS.png',
-    url: 'https://raisingkidsinportugal.com/en',
-    alt: 'Screenshot of Raising Kids in Portugal platform',
+    title: 'GetNIF Portugal',
+    slug: 'getnifportugal.com',
+    image: '/images/getNifPortugal.png',
+    url: 'https://getnifportugal.com',
+    alt: 'Screenshot of GetNIF Portugal platform',
     description:
-      'Automated Italian tax-code (Codice Fiscale) generation platform with multi-tenant auth, usage-based billing, and full i18n support.',
-    tags: ['Next.js 16', 'Supabase', 'i18n'],
-    status: 'LIVE' as const,
+      'SaaS platform to obtain a Portuguese NIF remotely — Stripe checkout, signed document uploads, realtime admin dashboard, and trilingual support (EN/PT/FR). No Portugal visit required.',
+    tags: ['Next.js 16', 'Supabase', 'Stripe', 'Resend', 'i18n'],
+    status: 'WIP' as const,
   },
   {
     icon: Globe,
     hue: '293.01',
-    title: 'SEO / GEO Engine',
-    slug: 'geo-engine.vercel.app',
-    image: null,
-    alt: 'SEO and GEO engine dashboard placeholder',
+    title: 'TrustFamily',
+    slug: 'trustfamily.com',
+    image: '/images/NIFSaaS.png',
+    url: 'https://trustfamily.com',
+    alt: 'Screenshot of TrustFamily relocation platform',
     description:
-      'GEO-optimized content pipeline — entity linking, structured data injection, and programmatic page generation at scale.',
-    tags: ['Next.js 16', 'OpenAI', 'Postgres', 'Edge Functions'],
-    status: 'WIP' as const,
+      '77 schools and 64 neighborhoods indexed for expat families relocating to Portugal — ISR across 6 locales, full JSON-LD suite, and speakable schema targeting AI Overviews.',
+    tags: ['Next.js 16', 'next-intl', 'ISR', 'GEO/SEO'],
+    status: 'LIVE' as const,
   },
   {
     icon: Zap,
@@ -43,23 +44,21 @@ const PROJECTS = [
     description:
       'One-page marketing microsite built with Vibe Coding™ — AI-assisted design iteration, zero-CSS workflow, deployed in under 48 h.',
     tags: ['Next.js 16', 'Framer Motion', 'Tailwind v4'],
-    status: 'LIVE' as const,
+    status: 'SHIPPED' as const,
   },
 ]
 
-function StatusBadge({ status }: { status: 'LIVE' | 'WIP' }) {
-  const isLive = status === 'LIVE'
+const STATUS_STYLES = {
+  LIVE:    { dot: 'bg-emerald-500', badge: 'border-emerald-500/40 text-emerald-500 bg-emerald-500/6' },
+  WIP:     { dot: 'bg-amber-500',   badge: 'border-amber-500/40 text-amber-500 bg-amber-500/6' },
+  SHIPPED: { dot: 'bg-cyan-500',    badge: 'border-cyan-500/40 text-cyan-500 bg-cyan-500/6' },
+}
+
+function StatusBadge({ status }: { status: keyof typeof STATUS_STYLES }) {
+  const { dot, badge } = STATUS_STYLES[status]
   return (
-    <span
-      className={[
-        'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full',
-        'text-[10px] font-semibold tracking-widest uppercase border shrink-0',
-        isLive
-          ? 'border-emerald-500/40 text-emerald-500 bg-emerald-500/6'
-          : 'border-amber-500/40 text-amber-500 bg-amber-500/6',
-      ].join(' ')}
-    >
-      <span className={['w-1.5 h-1.5 rounded-full', isLive ? 'bg-emerald-500' : 'bg-amber-500'].join(' ')} />
+    <span className={['inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full', 'text-[10px] font-semibold tracking-widest uppercase border shrink-0', badge].join(' ')}>
+      <span className={['w-1.5 h-1.5 rounded-full', dot].join(' ')} />
       {status}
     </span>
   )
