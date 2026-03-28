@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --turbopack --yes)",
       "Bash(npx shadcn@latest init --yes --defaults)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git -C \"C:\\\\Users\\\\sambu\\\\portfolio2\" status --short public/images/)"
     ]
   }
 }

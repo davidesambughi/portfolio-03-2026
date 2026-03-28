@@ -25,10 +25,10 @@ const PROJECTS = [
     icon: Globe,
     hue: '293.01',
     title: 'Raising Kids In Portugal',
-    slug: 'trustfamily.com',
-    image: '/images/NIFSaaS.png',
+    slug: 'raisingkidsinportugal.com',
+    image: '/images/raisingkidsinportugal.png',
     url: 'https://raisingkidsinportugal.com',
-    alt: 'Screenshot of TrustFamily relocation platform',
+    alt: 'Screenshot of Raising Kids in Portugal platform',
     description:
       '77 schools and 64 neighborhoods indexed for expat families relocating to Portugal — ISR across 6 locales, full JSON-LD suite, and speakable schema targeting AI Overviews.',
     tags: ['Next.js 16', 'next-intl', 'ISR', 'GEO/SEO'],
