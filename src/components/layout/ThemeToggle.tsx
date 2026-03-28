@@ -10,7 +10,9 @@ export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
 
   // Evita hydration mismatch — renderizza solo dopo il mount
-  useEffect(() => setMounted(true), [])
+  // next-themes: intentional setState in effect to suppress hydration mismatch
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setMounted(true) }, [])
   if (!mounted) return null
 
   const isDark = theme === 'dark'

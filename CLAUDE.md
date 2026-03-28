@@ -14,6 +14,8 @@ npm run lint     # ESLint
 
 No test suite is configured.
 
+**Environment** — requires `RESEND_API_KEY` in `.env.local` for the contact form (`src/app/actions/send-email.ts`).
+
 ## Architecture
 
 Single-page portfolio built with **Next.js 16** (App Router) + **React 19** + **Tailwind CSS v4** + **Framer Motion**.
@@ -35,6 +37,16 @@ Single-page portfolio built with **Next.js 16** (App Router) + **React 19** + **
 
 **Path alias** — `@/` → `src/`.
 
+**Key utilities & libraries**:
+- `cn()` — `src/lib/utils.ts`, clsx + tailwind-merge, use for all conditional classNames
+- `cva()` — `class-variance-authority`, use for component variants (installed, not `cn`)
+- `lucide-react` — icon library; import icons directly from it
+- `@base-ui/react` — unstyled UI primitives (use over raw HTML for accessible interactive elements)
+- `tw-animate-css` — animation utility classes available via Tailwind
+- `shadcn` — installed; `globals.css` imports `shadcn/tailwind.css`, giving access to all shadcn component primitives
+
+**Contact form** — `src/app/actions/send-email.ts` is a Server Action using Resend (email delivery) and Zod (form validation). Input comes from a `FormData` object.
+
 ---
 
 ## Client vs Server components
@@ -55,9 +67,33 @@ Push `'use client'` as far down the tree as possible — wrap only the interacti
 
 ## Design system
 
+### Semantic tokens
+
+`globals.css` defines two token layers. Always use semantic tokens in components; reach for palette primitives only when no semantic token fits.
+
+**Palette primitives** (OKLCH): `--violet-*`, `--electric-*`, `--amber-*`, `--emerald-*`, `--coral-*`, `--cyan-*`, `--neutral-*` (50–1000).
+
+**Semantic tokens** (auto-switch light/dark):
+
+| Token | Light | Dark | Use for |
+|---|---|---|---|
+| `--background` / `--foreground` | white / neutral-950 | neutral-1000 / neutral-50 | page surface & body text |
+| `--card` / `--card-foreground` | neutral-50 | neutral-950 | card surfaces |
+| `--primary` / `--primary-foreground` | violet-500ish | violet-400 | primary buttons, active states |
+| `--secondary` | neutral-100 | neutral-900 | secondary buttons |
+| `--muted` / `--muted-foreground` | neutral-100 / neutral-500 | neutral-800 / neutral-400 | placeholder, disabled, captions |
+| `--accent` / `--accent-foreground` | electric-600 | electric-400 | highlights, focus rings |
+| `--border` / `--input` | neutral-200 | neutral-800 | borders, form inputs |
+| `--ring` | violet-500 | violet-400 | focus outlines |
+| `--destructive` | coral-500 | coral-400 | errors, delete actions |
+| `--success` | emerald-500 | emerald-400 | success states |
+| `--warning` | amber-600 | amber-400 | warnings |
+| `--info` | cyan-500 | cyan-400 | info messages |
+| `--radius` | `0.5rem` | same | base border radius |
+
 ### Color pattern — light vs dark
 
-The same semantic pattern repeats across every element:
+The same glow/gradient pattern repeats across interactive elements:
 
 | Role | Light mode | Dark mode |
 |---|---|---|

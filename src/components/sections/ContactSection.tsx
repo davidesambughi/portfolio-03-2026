@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { sendEmail } from '@/app/actions/send-email'
 
@@ -127,7 +127,7 @@ export function ContactSection() {
                   className="flex items-center gap-2 text-emerald-500 text-sm font-medium bg-emerald-500/5 px-4 py-2 rounded-lg border border-emerald-500/20"
                 >
                   <CheckCircle2 size={16} />
-                  Email sent successfully! I'll get back to you soon.
+                  Email sent successfully! I&apos;ll get back to you soon.
                 </motion.div>
               )}
               {status === 'error' && (
@@ -171,24 +171,30 @@ export function ContactSection() {
 
             {/* Social Links */}
             <div className="flex flex-wrap gap-3">
-              <Button 
-                variant="outline" 
-                className="w-10 h-10 p-0 rounded-xl border-border bg-card/40 hover:bg-card/60 text-muted-foreground hover:text-foreground transition-all duration-300"
-                asChild
+              <a
+                href="https://github.com/davidesambughi"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className={cn(
+                  buttonVariants({ variant: 'outline' }),
+                  "w-10 h-10 p-0 rounded-xl border-border bg-card/40 hover:bg-card/60 text-muted-foreground hover:text-foreground transition-all duration-300"
+                )}
               >
-                <a href="https://github.com/vostro-username" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                  {GITHUB_SVG}
-                </a>
-              </Button>
-              <Button 
-                variant="outline" 
-                className="w-10 h-10 p-0 rounded-xl border-border bg-card/40 hover:bg-card/60 text-muted-foreground hover:text-foreground transition-all duration-300"
-                asChild
+                {GITHUB_SVG}
+              </a>
+              <a
+                href="https://www.linkedin.com/in/davide-sambughi-358b903aa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className={cn(
+                  buttonVariants({ variant: 'outline' }),
+                  "w-10 h-10 p-0 rounded-xl border-border bg-card/40 hover:bg-card/60 text-muted-foreground hover:text-foreground transition-all duration-300"
+                )}
               >
-                <a href="https://linkedin.com/in/vostro-username" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  {LINKEDIN_SVG}
-                </a>
-              </Button>
+                {LINKEDIN_SVG}
+              </a>
             </div>
           </div>
         </form>

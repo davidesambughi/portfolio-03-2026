@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -67,35 +68,28 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* ── Right Side: Visual Placeholder (40%) ── */}
-        <div className="lg:w-[40%] w-full aspect-square relative order-1 lg:order-2 group">
-          <motion.div 
+        {/* ── Right Side: Hero Image ── */}
+        <div className="lg:w-[40%] w-full aspect-square relative order-1 lg:order-2 flex items-center justify-center">
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            className={cn(
-              "w-full h-full rounded-3xl border-2 border-dashed border-border/40 bg-card/20 backdrop-blur-[2px]",
-              "flex flex-col items-center justify-center gap-4 transition-all duration-500",
-              "group-hover:border-primary/30 group-hover:bg-card/30"
-            )}
+            className="relative w-full h-full rounded-3xl overflow-hidden shadow-[0_0_60px_-20px_var(--glow-primary)]"
           >
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl border border-border/60 bg-muted/40 flex items-center justify-center animate-pulse">
-                <div className="w-4 h-4 rounded-full bg-primary/20 blur-[4px]" />
-              </div>
-              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/30">
-                Visual Concept
-              </span>
-            </div>
-
-            {/* Geometric accents inside placeholder */}
-            <div className="absolute top-8 left-8 w-4 h-4 border-t-2 border-l-2 border-border/20 rounded-tl-lg" />
-            <div className="absolute bottom-8 right-8 w-4 h-4 border-b-2 border-r-2 border-border/20 rounded-br-lg" />
+            <Image
+              src="/images/ai-myself-elegant-light-removebg-preview.png"
+              alt="Davide Sambughi"
+              fill
+              className="object-cover"
+              style={{ objectPosition: '50% 20%' }}
+              sizes="(max-width: 1024px) 100vw, 40vw"
+              priority
+            />
           </motion.div>
-          
-          {/* Large Radial Glow behind placeholder */}
-          <div 
-            className="absolute inset-0 -z-10 blur-[120px] opacity-20 pointer-events-none scale-110"
+
+          {/* Large Radial Glow behind image */}
+          <div
+            className="absolute inset-0 -z-10 blur-[120px] opacity-25 pointer-events-none scale-110"
             style={{ background: 'var(--gradient-brand)' }}
           />
         </div>

@@ -16,8 +16,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "My portfolio",
+  title: "Davide Sambughi — Full-Stack Developer",
+  description:
+    "Portfolio of Davide Sambughi, a full-stack developer specializing in Next.js 16, GEO-optimized web apps, and AI-assisted development.",
+  openGraph: {
+    title: "Davide Sambughi — Full-Stack Developer",
+    description:
+      "Full-stack developer specializing in Next.js 16, GEO-optimized web apps, and AI-assisted development.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Davide Sambughi — Full-Stack Developer",
+    description:
+      "Full-stack developer specializing in Next.js 16, GEO-optimized web apps, and AI-assisted development.",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="it"
+      lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
@@ -35,7 +49,7 @@ export default function RootLayout({
         <Providers>
           <Sidebar />
           <ThemeToggle />
-          {/* pl-14 = 56px → larghezza sidebar collassata */}
+          {/* pl-14 = 56px — collapsed sidebar width, must match SIDEBAR_COLLAPSED in Sidebar.tsx */}
           <div className="flex-1 pl-14">
             {children}
           </div>

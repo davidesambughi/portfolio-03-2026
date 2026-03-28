@@ -11,7 +11,7 @@ const PROJECTS = [
   {
     icon: Building2,
     hue: '276.97',
-    title: 'NIF SaaS',
+    title: '',
     slug: 'raisingkidsinportugal.com',
     image: '/images/NIFSaaS.png',
     url: 'https://raisingkidsinportugal.com/en',
@@ -89,25 +89,25 @@ export function ProjectsSection() {
         {PROJECTS.map(({ icon: Icon, hue, title, slug, description, tags, status, image, alt, url }, index) => {
           const isSelected = selectedId === title
           return (
-            <motion.article
+            <motion.div
               key={title}
               role="button"
               tabIndex={0}
-              aria-selected={isSelected}
+              aria-label={title}
+              aria-pressed={isSelected}
               onClick={() => handleAction(title, url)}
               onKeyDown={(e) => handleKeyDown(e, title, url)}
               whileHover={{ y: -3 }}
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               className={cn(
-                "group p-[1px] rounded-2xl overflow-hidden cursor-pointer outline-none transition-all duration-300",
-                isSelected 
-                  ? "shadow-[0_0_40px_-10px_var(--glow-primary)]" 
-                  : "hover:shadow-[0_0_30px_-12px_var(--glow-primary)]"
+                "group rounded-2xl overflow-hidden cursor-pointer outline-none transition-all duration-300 border",
+                isSelected
+                  ? "border-primary/35 dark:border-electric-400/30 shadow-[0_0_40px_-10px_var(--glow-primary)]"
+                  : "border-primary/15 dark:border-electric-400/12 hover:border-primary/30 dark:hover:border-electric-400/25 hover:shadow-[0_0_30px_-12px_var(--glow-primary)]"
               )}
-              style={{ backgroundImage: 'var(--gradient-brand-h)' }}
             >
               <div className={cn(
-                "rounded-[15px] overflow-hidden bg-card/95 h-full transition-all duration-300",
+                "rounded-2xl overflow-hidden bg-card/95 h-full transition-all duration-300",
                 isSelected ? "bg-card" : "group-hover:bg-card"
               )}>
                 {/* ── Browser chrome header ── */}
@@ -193,7 +193,7 @@ export function ProjectsSection() {
                   </div>
                 </div>
               </div>
-            </motion.article>
+            </motion.div>
           )
         })}
       </div>
