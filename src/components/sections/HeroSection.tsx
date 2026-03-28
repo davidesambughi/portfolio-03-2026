@@ -11,10 +11,10 @@ export function HeroSection() {
       className="relative flex flex-col min-h-[90vh] justify-center"
       style={{ backgroundImage: 'var(--gradient-hero)' }}
     >
-      <div className="px-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-20 py-20">
-        
+      <div className="px-12 flex flex-col lg:flex-row items-center gap-6 py-8">
+
         {/* ── Left Side: Content (60%) ── */}
-        <div className="flex-1 max-w-2xl order-2 lg:order-1">
+        <div className="lg:w-[55%] w-full order-2 lg:order-1">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full
                           border border-emerald-500/40 bg-emerald-500/6 mb-7">
@@ -69,27 +69,26 @@ export function HeroSection() {
         </div>
 
         {/* ── Right Side: Hero Image ── */}
-        <div className="lg:w-[40%] w-full aspect-square relative order-1 lg:order-2 flex items-center justify-center">
+        <div className="lg:w-[45%] w-full order-1 lg:order-2 relative flex justify-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            className="relative w-full h-full rounded-3xl overflow-hidden shadow-[0_0_60px_-20px_var(--glow-primary)]"
+            className="w-full"
           >
             <Image
               src="/images/ai-myself-elegant-light-removebg-preview.png"
               alt="Davide Sambughi"
-              fill
-              className="object-cover"
-              style={{ objectPosition: '50% 20%' }}
-              sizes="(max-width: 1024px) 100vw, 40vw"
+              width={600}
+              height={700}
+              className="w-full h-auto"
               priority
             />
           </motion.div>
 
           {/* Large Radial Glow behind image */}
           <div
-            className="absolute inset-0 -z-10 blur-[120px] opacity-25 pointer-events-none scale-110"
+            className="absolute inset-0 -z-10 blur-[120px] opacity-25 pointer-events-none"
             style={{ background: 'var(--gradient-brand)' }}
           />
         </div>

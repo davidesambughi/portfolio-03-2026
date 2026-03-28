@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState, KeyboardEvent } from 'react'
 import { motion } from 'framer-motion'
-import { Building2, Globe, Zap, Lock, ExternalLink } from 'lucide-react'
+import { Building2, Globe, Lock, ExternalLink } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -33,18 +33,6 @@ const PROJECTS = [
       '77 schools and 64 neighborhoods indexed for expat families relocating to Portugal — ISR across 6 locales, full JSON-LD suite, and speakable schema targeting AI Overviews.',
     tags: ['Next.js 16', 'next-intl', 'ISR', 'GEO/SEO'],
     status: 'LIVE' as const,
-  },
-  {
-    icon: Zap,
-    hue: '303.90',
-    title: 'Vibe Microsite',
-    slug: 'vibe.studio',
-    image: null,
-    alt: 'Vibe Microsite design placeholder',
-    description:
-      'One-page marketing microsite built with Vibe Coding™ — AI-assisted design iteration, zero-CSS workflow, deployed in under 48 h.',
-    tags: ['Next.js 16', 'Framer Motion', 'Tailwind v4'],
-    status: 'SHIPPED' as const,
   },
 ]
 
@@ -83,8 +71,8 @@ export function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="px-12 py-10">
-      <div className="flex flex-col gap-4">
+    <section id="projects" className="px-12 py-10 overflow-hidden">
+      <div className="flex flex-col gap-4 py-1">
         {PROJECTS.map(({ icon: Icon, hue, title, slug, description, tags, status, image, alt, url }, index) => {
           const isSelected = selectedId === title
           return (
@@ -96,17 +84,19 @@ export function ProjectsSection() {
               aria-pressed={isSelected}
               onClick={() => handleAction(title, url)}
               onKeyDown={(e) => handleKeyDown(e, title, url)}
-              whileHover={{ y: -3 }}
+              whileHover={{ scale: 1.01 }}
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               className={cn(
-                "group rounded-2xl overflow-hidden cursor-pointer outline-none transition-all duration-300 border",
+                "group rounded-2xl overflow-hidden cursor-pointer outline-none transition-all duration-300",
+                "border dark:border-0 dark:p-[1px]",
                 isSelected
-                  ? "border-primary/35 dark:border-electric-400/30 shadow-[0_0_40px_-10px_var(--glow-primary)]"
-                  : "border-primary/15 dark:border-electric-400/12 hover:border-primary/30 dark:hover:border-electric-400/25 hover:shadow-[0_0_30px_-12px_var(--glow-primary)]"
+                  ? "border-primary/35 shadow-[0_0_40px_-10px_var(--glow-primary)]"
+                  : "border-primary/15 hover:border-primary/30 hover:shadow-[0_0_30px_-12px_var(--glow-primary)]"
               )}
+              style={{ backgroundImage: 'var(--project-card-border)' }}
             >
               <div className={cn(
-                "rounded-2xl overflow-hidden bg-card/95 h-full transition-all duration-300",
+                "rounded-2xl dark:rounded-[15px] overflow-hidden bg-card/95 h-full transition-all duration-300",
                 isSelected ? "bg-card" : "group-hover:bg-card"
               )}>
                 {/* ── Browser chrome header ── */}

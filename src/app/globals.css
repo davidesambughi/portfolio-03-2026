@@ -297,6 +297,7 @@
   /* Glow */
   --glow-primary:   oklch(0.5106 0.230 276.97 / 0.20);
   --glow-secondary: oklch(0.6268 0.233 303.90 / 0.16);
+  --project-card-border: none;
 
   /* Hero radial */
   --gradient-hero: radial-gradient(ellipse 70% 55% at 75% -5%,
@@ -335,6 +336,7 @@
   /* Glow */
   --glow-primary:   oklch(0.795 0.215 198 / 0.22);
   --glow-secondary: oklch(0.70  0.220 274 / 0.18);
+  --project-card-border: var(--gradient-brand-h);
 
   /* Hero radial */
   --gradient-hero: radial-gradient(ellipse 70% 55% at 75% -5%,
