@@ -115,6 +115,16 @@ export function ContactSection() {
             </div>
           </div>
 
+          {/* ── Honeypot — hidden from humans, visible to bots ── */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            aria-hidden="true"
+            autoComplete="off"
+            className="absolute -left-[9999px] opacity-0 h-0 overflow-hidden"
+          />
+
           {/* ── Bottom Row: Submit & Socials ── */}
           <div className="flex flex-col gap-8 pt-2">
             {/* Status Messages */}

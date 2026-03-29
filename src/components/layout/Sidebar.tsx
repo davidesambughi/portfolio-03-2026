@@ -122,6 +122,7 @@ export function Sidebar() {
                 <button
                   key={id}
                   onClick={() => scrollTo(id)}
+                  aria-current={isActive ? 'true' : undefined}
                   className={[
                     'group flex items-center gap-3 h-10 px-3 rounded-lg w-full',
                     'transition-all duration-200 cursor-pointer',

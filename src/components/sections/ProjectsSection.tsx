@@ -88,6 +88,7 @@ export function ProjectsSection() {
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               className={cn(
                 "group rounded-2xl overflow-hidden cursor-pointer outline-none transition-all duration-300",
+                "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 "border dark:border-0 dark:p-[1px]",
                 isSelected
                   ? "border-primary/35 shadow-[0_0_40px_-10px_var(--glow-primary)]"

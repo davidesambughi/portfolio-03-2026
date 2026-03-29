@@ -21,6 +21,11 @@ function escapeHtml(str: string): string {
 }
 
 export async function sendEmail(formData: FormData) {
+  // Honeypot — bots fill this field, humans don't see it
+  if (formData.get('website')) {
+    return { success: true }
+  }
+
   const validatedFields = ContactFormSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
