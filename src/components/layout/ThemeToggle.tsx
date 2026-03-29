@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { Sun, Moon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -21,13 +22,14 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={isDark ? 'Passa a light mode' : 'Passa a dark mode'}
-      className="fixed top-4 right-4 z-50
-                 flex items-center justify-center
-                 h-9 w-9 rounded-lg
-                 bg-card border border-border
-                 text-muted-foreground hover:text-foreground
-                 shadow-sm hover:shadow-md
-                 transition-colors duration-150 cursor-pointer"
+      className={cn(
+        "fixed top-4 right-4 z-50",
+        "flex items-center justify-center h-9 w-9 rounded-lg",
+        "bg-card shadow-sm hover:shadow-md transition-colors duration-150 cursor-pointer",
+        isDark
+          ? "border-2 border-neutral-400 text-neutral-100 hover:border-neutral-200"
+          : "border-2 border-neutral-600 text-neutral-800 hover:border-neutral-900"
+      )}
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
@@ -39,8 +41,8 @@ export function ThemeToggle() {
           className="flex"
         >
           {isDark
-            ? <Sun  size={16} strokeWidth={1.75} />
-            : <Moon size={16} strokeWidth={1.75} />
+            ? <Sun  size={16} strokeWidth={2.25} />
+            : <Moon size={16} strokeWidth={2.25} />
           }
         </motion.span>
       </AnimatePresence>

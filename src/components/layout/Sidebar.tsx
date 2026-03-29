@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import { ChevronRight, House, FolderOpen, Layers, User, Mail, Menu, X } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const NAV_ITEMS = [
   { id: 'hero',     label: 'Home',     icon: House      },
@@ -74,8 +75,13 @@ export function Sidebar() {
           initial={false}
           animate={{ width: open ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED }}
           transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          style={{ backgroundImage: 'var(--gradient-sidebar)' }}
-          className="hidden md:flex fixed left-0 top-0 h-screen z-50 flex-col bg-sidebar overflow-hidden"
+          style={{ backgroundImage: open ? undefined : 'var(--gradient-sidebar)' }}
+          className={cn(
+            "hidden md:flex fixed left-0 top-0 h-screen z-50 flex-col overflow-hidden",
+            open
+              ? "bg-sidebar/40 backdrop-blur-xl"
+              : "bg-sidebar"
+          )}
         >
           {/* ── Right border — gradient glow ── */}
           <div
