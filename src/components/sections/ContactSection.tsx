@@ -47,7 +47,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="px-12 py-20" aria-labelledby="contact-title">
+    <section id="contact" className="px-4 md:px-8 lg:px-12 py-20" aria-labelledby="contact-title">
       <h2 id="contact-title" className="sr-only">Contact Me</h2>
 
       <div className="max-w-4xl">

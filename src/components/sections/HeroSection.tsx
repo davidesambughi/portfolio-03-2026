@@ -11,7 +11,7 @@ export function HeroSection() {
       className="relative flex flex-col min-h-[90vh] justify-center"
       style={{ backgroundImage: 'var(--gradient-hero)' }}
     >
-      <div className="px-12 flex flex-col lg:flex-row items-center gap-6 py-8">
+      <div className="px-4 md:px-8 lg:px-12 flex flex-col lg:flex-row items-center gap-6 py-8">
 
         {/* ── Left Side: Content (60%) ── */}
         <div className="lg:w-[55%] w-full order-2 lg:order-1">
@@ -28,11 +28,11 @@ export function HeroSection() {
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight text-foreground mb-1">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-foreground mb-1">
             Davide Sambughi
           </h1>
           <p
-            className="text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
             style={{ backgroundImage: 'var(--gradient-brand)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
           >
             Full-Stack Developer
@@ -97,7 +97,7 @@ export function HeroSection() {
       </div>
 
       {/* ── Scroll indicator ── */}
-      <div className="px-12 pb-8 flex items-center gap-3">
+      <div className="px-4 md:px-8 lg:px-12 pb-8 flex items-center gap-3">
         <span className="text-[9px] font-medium tracking-[0.18em] uppercase text-muted-foreground/35 shrink-0">
           Scroll to explore
         </span>

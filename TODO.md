@@ -19,3 +19,5 @@ UI/UX
 1. sidebar decompressa ("aperta") con sfondo semitrasparente o blur 
 2. altri miglioramenti ? chiedi all agente ai ( ricordati performace come priorita)
     
+
+    VERSIONE MOBILE !!!!!!!

@@ -8,7 +8,7 @@ const LEARNING = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="px-12 py-16" aria-labelledby="about-title">
+    <section id="about" className="px-4 md:px-8 lg:px-12 py-16" aria-labelledby="about-title">
       <h2 id="about-title" className="sr-only">About Davide Sambughi</h2>
 
       <div className="flex flex-col lg:flex-row gap-8 items-stretch">

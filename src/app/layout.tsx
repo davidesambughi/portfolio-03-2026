@@ -50,7 +50,7 @@ export default function RootLayout({
           <Sidebar />
           <ThemeToggle />
           {/* pl-14 = 56px — collapsed sidebar width, must match SIDEBAR_COLLAPSED in Sidebar.tsx */}
-          <div className="flex-1 pl-14">
+          <div className="flex-1 md:pl-14">
             {children}
           </div>
         </Providers>

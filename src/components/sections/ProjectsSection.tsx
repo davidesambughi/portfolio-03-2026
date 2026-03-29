@@ -71,7 +71,7 @@ export function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="px-12 py-10 overflow-hidden">
+    <section id="projects" className="px-4 md:px-8 lg:px-12 py-10 overflow-hidden">
       <div className="flex flex-col gap-4 py-1">
         {PROJECTS.map(({ icon: Icon, hue, title, slug, description, tags, status, image, alt, url }, index) => {
           const isSelected = selectedId === title
@@ -114,7 +114,7 @@ export function ProjectsSection() {
                 </div>
 
                 {/* ── Browser body ── */}
-                <div className="flex min-h-[180px]">
+                <div className="flex flex-col md:flex-row min-h-[180px]">
                   {/* Left: content */}
                   <div className="flex-1 min-w-0 flex flex-col p-6">
                     <div className="flex items-center gap-2.5 mb-2">
@@ -146,7 +146,7 @@ export function ProjectsSection() {
                   </div>
 
                   {/* Right: screenshot */}
-                  <div className="w-[38%] shrink-0 border-l border-border/40 relative overflow-hidden bg-muted/5 min-h-[230px]">
+                  <div className="w-full md:w-[38%] shrink-0 border-t md:border-t-0 md:border-l border-border/40 relative overflow-hidden bg-muted/5 min-h-[200px] md:min-h-[230px]">
                     {image ? (
                       <motion.div 
                         className="relative w-full h-full"
@@ -157,7 +157,7 @@ export function ProjectsSection() {
                           src={image}
                           alt={alt || title}
                           fill
-                          className="object-cover object-center transition-opacity duration-300"
+                          className="object-contain object-top transition-opacity duration-300"
                           sizes="(max-width: 768px) 100vw, 33vw"
                           priority={index === 0}
                         />

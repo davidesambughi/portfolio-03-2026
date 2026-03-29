@@ -4,7 +4,12 @@
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --turbopack --yes)",
       "Bash(npx shadcn@latest init --yes --defaults)",
       "Bash(npm install:*)",
-      "Bash(git -C \"C:\\\\Users\\\\sambu\\\\portfolio2\" status --short public/images/)"
+      "Bash(git -C \"C:\\\\Users\\\\sambu\\\\portfolio2\" status --short public/images/)",
+      "Bash(find /c/Users/sambu/portfolio2/src -type f \\\\\\(-name *.tsx -o -name *.ts -o -name *.css \\\\\\))",
+      "Bash(find /c/Users/sambu/portfolio2 -name next.config.* -o -name tailwind.config.*)",
+      "Bash(grep -r @apply.*sm: /c/Users/sambu/portfolio2/src --include=*.tsx --include=*.css)",
+      "Bash(grep -r \"md:\\\\|sm:\\\\|lg:\\\\|xl:\" /c/Users/sambu/portfolio2/src --include=*.tsx --include=*.css)",
+      "Bash(grep -r \"px-\\\\|py-\" /c/Users/sambu/portfolio2/src/components --include=*.tsx)"
     ]
   }
 }
