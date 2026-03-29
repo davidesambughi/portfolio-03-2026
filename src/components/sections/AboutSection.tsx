@@ -51,11 +51,11 @@ export function AboutSection() {
               they know how to ask for it.
             </p>
             <p>
-              The gap between me and a CS graduate is real and I see it clearly. What I bring instead is a{' '}
-              <span className="text-foreground font-semibold">bias toward shipping</span>, a business instinct
-              that keeps the user in frame, and the kind of resilience that comes from starting over more than once.
-              The projects in this portfolio are live, have real users, and were built during an internship —
-              not in a tutorial.
+              The journey is just starting — and I'm aware of how much there is still to learn. What I already
+              know is that I work best when there's something real at stake: a{' '}
+              <span className="text-foreground font-semibold">real codebase, a real deadline, a real product</span>.
+              The projects here were built during an internship, not a tutorial — and that difference
+              shows up in every edge case I had to figure out on my own.
             </p>
           </div>
 

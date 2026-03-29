@@ -148,8 +148,8 @@ export function ProjectsSection() {
                   {/* Right: screenshot */}
                   <div className="w-full md:w-[38%] shrink-0 border-t md:border-t-0 md:border-l border-border/40 relative overflow-hidden bg-muted/5 min-h-[200px] md:min-h-[230px]">
                     {image ? (
-                      <motion.div 
-                        className="relative w-full h-full"
+                      <motion.div
+                        className="absolute inset-0"
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                       >
