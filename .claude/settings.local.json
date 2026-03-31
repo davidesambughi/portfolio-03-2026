@@ -9,7 +9,8 @@
       "Bash(find /c/Users/sambu/portfolio2 -name next.config.* -o -name tailwind.config.*)",
       "Bash(grep -r @apply.*sm: /c/Users/sambu/portfolio2/src --include=*.tsx --include=*.css)",
       "Bash(grep -r \"md:\\\\|sm:\\\\|lg:\\\\|xl:\" /c/Users/sambu/portfolio2/src --include=*.tsx --include=*.css)",
-      "Bash(grep -r \"px-\\\\|py-\" /c/Users/sambu/portfolio2/src/components --include=*.tsx)"
+      "Bash(grep -r \"px-\\\\|py-\" /c/Users/sambu/portfolio2/src/components --include=*.tsx)",
+      "WebSearch"
     ]
   }
 }

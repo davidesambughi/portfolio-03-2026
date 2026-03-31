@@ -35,8 +35,7 @@ export function AboutSection() {
 
           <div className="space-y-6 text-base md:text-lg leading-relaxed text-muted-foreground/80">
             <p>
-              The decision to learn to code came at <span className="text-foreground font-semibold">33</span> — which makes it deliberate.
-              Not a fallback, not something that happened by accident. I'm currently finishing a two-year{' '}
+              I'm currently finishing a two-year{' '}
               <span className="text-foreground font-medium">ITS diploma in full-stack development</span> (graduating July 2026)
               and five months into an international internship at{' '}
               <span className="text-foreground font-medium">InspectOs</span>, a Lisbon-based real estate startup,
