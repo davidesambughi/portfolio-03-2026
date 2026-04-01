@@ -295,6 +295,65 @@ export default function NifCaseStudy() {
                   </div>
                 </section>
               </FadeIn>
+
+              {/* ── Technical Decisions ── */}
+              <FadeIn delay={0.05} className="mb-14">
+                <section aria-labelledby="decisions-title">
+                  <h2 id="decisions-title" className="text-2xl font-bold text-foreground mb-6 tracking-tight">
+                    Technical Decisions
+                  </h2>
+
+                  <div className="overflow-x-auto rounded-xl border border-border/40">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border/40">
+                          <th className="px-4 py-3 text-left font-semibold text-foreground w-[40%]">Question</th>
+                          <th className="px-4 py-3 text-left font-semibold text-foreground">Answer</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {DECISIONS.map(({ question, answer }) => (
+                          <tr
+                            key={question}
+                            className="border-b border-border/30 last:border-0 hover:bg-muted/30 transition-colors duration-150"
+                          >
+                            <td className="px-4 py-3 font-medium text-foreground align-top">{question}</td>
+                            <td className="px-4 py-3 text-muted-foreground/80 align-top">{answer}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </FadeIn>
+
+              {/* ── Reflection ── */}
+              <FadeIn>
+                <section aria-labelledby="reflection-title">
+                  <h2 id="reflection-title" className="text-2xl font-bold text-foreground mb-6 tracking-tight">
+                    What I'd Do Differently
+                  </h2>
+
+                  <div className="rounded-xl border border-border/40 bg-card/40 p-6 text-sm leading-relaxed space-y-4 text-muted-foreground/80">
+                    <p>
+                      Two things. First, I'd add automated tests earlier — especially around the Stripe webhook handler,
+                      which is the most critical path and currently has no safety net. The atomic idempotency check and
+                      status guard are sound logic, but logic without tests is just hope.
+                    </p>
+                    <p>
+                      Second, I'd define the order status state machine explicitly before writing code — mapping out all
+                      valid transitions upfront rather than discovering edge cases while building. The current machine
+                      is clean, but it emerged through iteration rather than design.
+                    </p>
+                    <p>
+                      I'd also think more carefully about{' '}
+                      <span className="text-foreground font-medium">vendor concentration</span>: auth, database, storage,
+                      and realtime all run through Supabase, which is convenient but means a Supabase outage affects the
+                      entire product. For early stage this is the right trade-off — but it's worth naming explicitly.
+                    </p>
+                  </div>
+                </section>
+              </FadeIn>
             </div>
           </div>
         </div>
