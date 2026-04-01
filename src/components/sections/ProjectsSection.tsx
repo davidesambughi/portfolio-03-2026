@@ -2,9 +2,8 @@
 
 import Image from 'next/image'
 import { useState, KeyboardEvent } from 'react'
-import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Building2, Globe, Lock, ExternalLink, ArrowRight } from 'lucide-react'
+import { Building2, Globe, Lock, ExternalLink } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -15,7 +14,7 @@ const PROJECTS = [
     title: 'GetNIF Portugal',
     slug: 'getnifportugal.com',
     image: '/images/getNifPortugal.png',
-    url: '/projects/nif',
+    url: 'https://nif-saas-nextjs16.vercel.app/en',
     alt: 'Screenshot of GetNIF Portugal platform',
     description:
       'SaaS platform to obtain a Portuguese NIF remotely — Stripe checkout, signed document uploads, realtime admin dashboard, and trilingual support (EN/PT/FR). No Portugal visit required.',
@@ -54,7 +53,6 @@ function StatusBadge({ status }: { status: keyof typeof STATUS_STYLES }) {
 }
 
 export function ProjectsSection() {
-  const router = useRouter()
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
   const handleAction = (title: string, url?: string) => {
@@ -62,11 +60,7 @@ export function ProjectsSection() {
       setSelectedId(prev => prev === title ? null : title)
       return
     }
-    if (url.startsWith('/')) {
-      router.push(url)
-    } else {
-      window.open(url, '_blank', 'noopener,noreferrer')
-    }
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   const handleKeyDown = (e: KeyboardEvent, title: string, url?: string) => {
@@ -134,9 +128,7 @@ export function ProjectsSection() {
                       <h3 className="font-semibold text-base text-foreground leading-tight group-hover:text-primary transition-colors duration-200 flex items-center gap-2">
                         {title}
                         {url && (
-                          url.startsWith('/')
-                            ? <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                            : <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                          <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                         )}
                       </h3>
                     </div>
