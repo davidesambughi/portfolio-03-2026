@@ -255,6 +255,46 @@ export default function NifCaseStudy() {
                   </ul>
                 </section>
               </FadeIn>
+
+              {/* ── Engineering Highlights ── */}
+              <FadeIn className="mb-14">
+                <section aria-labelledby="highlights-title">
+                  <h2 id="highlights-title" className="text-2xl font-bold text-foreground mb-6 tracking-tight">
+                    Engineering Highlights
+                  </h2>
+
+                  <div className="space-y-4">
+                    {HIGHLIGHTS.map(({ title, problem, solution, impact }) => (
+                      <div
+                        key={title}
+                        className="rounded-xl border border-border/40 bg-card/40 p-6 hover:border-primary/30 hover:bg-muted/20 transition-all duration-300"
+                      >
+                        <h3 className="text-base font-semibold text-foreground mb-4">{title}</h3>
+                        <div className="space-y-3 text-sm leading-relaxed">
+                          <div className="flex gap-4">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/40 shrink-0 mt-0.5 w-16">
+                              Problem
+                            </span>
+                            <p className="text-muted-foreground/80">{problem}</p>
+                          </div>
+                          <div className="flex gap-4">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/40 shrink-0 mt-0.5 w-16">
+                              Solution
+                            </span>
+                            <p className="text-muted-foreground/80">{solution}</p>
+                          </div>
+                          <div className="flex gap-4">
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/40 shrink-0 mt-0.5 w-16">
+                              Why
+                            </span>
+                            <p className="text-muted-foreground/60 italic">{impact}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </FadeIn>
             </div>
           </div>
         </div>
