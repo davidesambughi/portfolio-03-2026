@@ -19,7 +19,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: 'GetNIF Portugal',
-  url: 'https://getnifportugal.com',
+  url: 'nif-saas-nextjs16.vercel.app',
   applicationCategory: 'BusinessApplication',
   description:
     'SaaS platform to obtain a Portuguese tax ID remotely. Stripe checkout, signed document uploads, AI document review, realtime admin dashboard, and trilingual support.',
@@ -331,25 +331,25 @@ export default function NifCaseStudy() {
               <FadeIn>
                 <section aria-labelledby="reflection-title">
                   <h2 id="reflection-title" className="text-2xl font-bold text-foreground mb-6 tracking-tight">
-                    What I'd Do Differently
+                    What I&apos;d Do Differently
                   </h2>
 
                   <div className="rounded-xl border border-border/40 bg-card/40 p-6 text-sm leading-relaxed space-y-4 text-muted-foreground/80">
                     <p>
-                      Two things. First, I'd add automated tests earlier — especially around the Stripe webhook handler,
+                      Two things. First, I&apos;d add automated tests earlier — especially around the Stripe webhook handler,
                       which is the most critical path and currently has no safety net. The atomic idempotency check and
                       status guard are sound logic, but logic without tests is just hope.
                     </p>
                     <p>
-                      Second, I'd define the order status state machine explicitly before writing code — mapping out all
+                      Second, I&apos;d define the order status state machine explicitly before writing code — mapping out all
                       valid transitions upfront rather than discovering edge cases while building. The current machine
                       is clean, but it emerged through iteration rather than design.
                     </p>
                     <p>
-                      I'd also think more carefully about{' '}
+                      I&apos;d also think more carefully about{' '}
                       <span className="text-foreground font-medium">vendor concentration</span>: auth, database, storage,
                       and realtime all run through Supabase, which is convenient but means a Supabase outage affects the
-                      entire product. For early stage this is the right trade-off — but it's worth naming explicitly.
+                      entire product. For early stage this is the right trade-off — but it&apos;s worth naming explicitly.
                     </p>
                   </div>
                 </section>

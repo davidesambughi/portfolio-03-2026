@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
 
 export function HeroSection() {
   return (
@@ -76,7 +75,7 @@ export function HeroSection() {
             <span className="text-foreground font-medium border-b border-primary/30">Lisbon startup</span>
             {' '}— building multilingual, GEO-optimized web apps with{' '}
             <span className="text-foreground font-medium border-b border-primary/30">Next.js 16</span>
-            {' '}and shipping them to production. Career-changer with a business background who treats every project as a lesson — in a field that moves this fast, staying curious isn't optional, it's the job.
+            {' '}and shipping them to production. Career-changer with a business background who treats every project as a lesson — in a field that moves this fast, staying curious isn&apos;t optional, it&apos;s the job.
           </p>
 
           {/* CTAs */}

@@ -35,7 +35,7 @@ export function AboutSection() {
 
           <div className="space-y-6 text-base md:text-lg leading-relaxed text-muted-foreground/80">
             <p>
-              I'm currently finishing a two-year{' '}
+              I&apos;m currently finishing a two-year{' '}
               <span className="text-foreground font-medium">ITS diploma in full-stack development</span> (graduating July 2026)
               and five months into an international internship at{' '}
               <span className="text-foreground font-medium">InspectOs</span>, a Lisbon-based real estate startup,
@@ -43,15 +43,15 @@ export function AboutSection() {
             </p>
             <p>
               Before code, five years across <span className="text-foreground font-medium">Australia</span> — hospitality,
-              construction, agriculture — taught me to operate in environments where adaptability isn't optional
+              construction, agriculture — taught me to operate in environments where adaptability isn&apos;t optional
               and no one hands you the answer. Before that, a decade managing the client side of our{' '}
               <span className="text-foreground font-medium">family insurance business</span> taught me something
               most junior developers take years to learn: how to understand what someone actually needs before
               they know how to ask for it.
             </p>
             <p>
-              The journey is just starting — and I'm aware of how much there is still to learn. What I already
-              know is that I work best when there's something real at stake: a{' '}
+              The journey is just starting — and I&apos;m aware of how much there is still to learn. What I already
+              know is that I work best when there&apos;s something real at stake: a{' '}
               <span className="text-foreground font-semibold">real codebase, a real deadline, a real product</span>.
               The projects here were built during an internship, not a tutorial — and that difference
               shows up in every edge case I had to figure out on my own.
