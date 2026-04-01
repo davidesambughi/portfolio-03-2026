@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://davidesambughi.com'),
   title: "Davide Sambughi — Full-Stack Developer",
   description:
     "Portfolio of Davide Sambughi, a full-stack developer specializing in Next.js 16, GEO-optimized web apps, and AI-assisted development.",
