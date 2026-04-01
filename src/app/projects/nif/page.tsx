@@ -164,6 +164,97 @@ export default function NifCaseStudy() {
 
               {/* Divider */}
               <div className="h-px bg-border/40 mb-12 animate-fade-in-up [animation-delay:250ms] [animation-fill-mode:both]" />
+
+              {/* ── Overview ── */}
+              <FadeIn className="mb-14">
+                <section aria-labelledby="overview-title">
+                  <h2 id="overview-title" className="text-2xl font-bold text-foreground mb-6 tracking-tight">
+                    What It Does
+                  </h2>
+
+                  {/* Step flow */}
+                  <div className="overflow-x-auto rounded-xl border border-border/40 mb-8">
+                    <table className="w-full text-sm">
+                      <tbody>
+                        {[
+                          ['1. Order', 'Customer fills in personal details and selects a service tier'],
+                          ['2. Payment', 'Stripe Checkout collects payment'],
+                          ['3. Documents', 'Customer uploads passport + proof of address via signed URLs'],
+                          ['4. Processing', 'Admin submits to Finanças (Portuguese tax authority) manually'],
+                          ['5. Delivery', 'NIF issued via admin panel → customer receives email with NIF number'],
+                        ].map(([step, what]) => (
+                          <tr key={step} className="border-b border-border/30 last:border-0 hover:bg-muted/30 transition-colors duration-150">
+                            <td className="px-4 py-3 font-medium text-foreground whitespace-nowrap w-[140px]">{step}</td>
+                            <td className="px-4 py-3 text-muted-foreground/80">{what}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Service tiers */}
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/40 mb-3">
+                    Service Tiers
+                  </p>
+                  <div className="overflow-x-auto rounded-xl border border-border/40">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border/40">
+                          <th className="px-4 py-3 text-left font-semibold text-foreground">Tier</th>
+                          <th className="px-4 py-3 text-left font-semibold text-foreground">Price</th>
+                          <th className="px-4 py-3 text-left font-semibold text-foreground">Includes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          ['Essential', '€79', 'NIF only'],
+                          ['Standard', '€129', 'NIF + 1-year fiscal representative'],
+                          ['Premium', '€199', 'NIF + 2-year fiscal rep + 48h express processing'],
+                        ].map(([tier, price, includes]) => (
+                          <tr key={tier} className="border-b border-border/30 last:border-0 hover:bg-muted/30 transition-colors duration-150">
+                            <td className="px-4 py-3 font-medium text-foreground">{tier}</td>
+                            <td className="px-4 py-3 font-mono text-primary font-semibold">{price}</td>
+                            <td className="px-4 py-3 text-muted-foreground/80">{includes}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </FadeIn>
+
+              {/* ── Architecture ── */}
+              <FadeIn delay={0.05} className="mb-14">
+                <section aria-labelledby="architecture-title">
+                  <h2 id="architecture-title" className="text-2xl font-bold text-foreground mb-6 tracking-tight">
+                    Architecture
+                  </h2>
+
+                  <pre className="bg-muted/30 border border-border/40 rounded-xl px-5 py-4 font-mono text-xs text-muted-foreground/70 overflow-x-auto mb-6 leading-relaxed">
+{`Pages/Components  →  Modules (Server Actions)  →  Repositories (Drizzle)  →  PostgreSQL
+                                ↓
+                     Services (pure business logic: payments, email)
+                     Lib (SDK singletons: supabase, stripe, resend, env)`}
+                  </pre>
+
+                  <ul className="space-y-3">
+                    {[
+                      ['Components never touch the database directly', 'prevents scattered queries and missed security checks across the codebase'],
+                      ['Repositories are the single source of truth', 'change a query once and everywhere benefits — no hunting for duplicate logic'],
+                      ['Services are pure functions with no Next.js imports', 'callable from both Server Actions and the Stripe webhook Route Handler'],
+                      ['Each layer has one job', 'the principle of separation of concerns, applied end to end'],
+                    ].map(([point, detail]) => (
+                      <li key={point} className="flex items-start gap-3 text-sm">
+                        <span className="font-mono text-primary/50 shrink-0 mt-0.5">›</span>
+                        <span>
+                          <span className="text-foreground font-medium">{point}</span>
+                          <span className="text-muted-foreground/70"> — {detail}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </FadeIn>
             </div>
           </div>
         </div>
