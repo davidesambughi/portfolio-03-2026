@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import { ChevronRight, House, FolderOpen, Layers, User, Mail, Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -20,6 +20,41 @@ export function Sidebar() {
   const [open, setOpen] = useState(false)
   const [activeId, setActiveId] = useState<string>('hero')
   const [mobileOpen, setMobileOpen] = useState(false)
+  const mobileNavRef = useRef<HTMLElement>(null)
+
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!mobileOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      
+      const nav = mobileNavRef.current
+      if (!nav) return
+
+      const focusableElements = nav.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          lastElement.focus()
+          e.preventDefault()
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          firstElement.focus()
+          e.preventDefault()
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [mobileOpen])
 
   useEffect(() => {
     const ratios = new Map<string, number>()
@@ -176,42 +211,57 @@ export function Sidebar() {
         {/* ── Mobile nav overlay ── */}
         <AnimatePresence>
           {mobileOpen && (
-            <motion.nav
-              id="mobile-nav"
-              role="navigation"
-              aria-label="Mobile navigation"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-md flex flex-col items-center justify-center gap-2"
-            >
-              {NAV_ITEMS.map(({ id, label, icon: Icon }, index) => {
-                const isActive = id === activeId
-                return (
-                  <button
-                    key={id}
-                    // eslint-disable-next-line jsx-a11y/no-autofocus
-                    autoFocus={index === 0}
-                    onClick={() => { scrollTo(id); setMobileOpen(false) }}
-                    className={[
-                      'flex items-center gap-3 px-8 py-3.5 rounded-xl text-lg font-medium w-52',
-                      'transition-all duration-200 cursor-pointer',
-                      isActive
-                        ? 'text-foreground bg-primary/8'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/40',
-                    ].join(' ')}
-                  >
-                    <Icon
-                      size={20}
-                      strokeWidth={1.75}
-                      className={isActive ? 'text-primary [filter:drop-shadow(0_0_5px_var(--glow-secondary))]' : ''}
-                    />
-                    {label}
-                  </button>
-                )
-              })}
-            </motion.nav>
+            <>
+              {/* ── Mobile Backdrop ── */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMobileOpen(false)}
+                className="md:hidden fixed inset-0 z-40 bg-background/60 backdrop-blur-sm cursor-pointer"
+                aria-hidden="true"
+              />
+              <motion.nav
+                id="mobile-nav"
+                ref={mobileNavRef}
+                role="navigation"
+                aria-label="Mobile navigation"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="md:hidden fixed inset-0 z-40 flex flex-col items-center justify-center gap-2 pointer-events-none"
+              >
+                {/* ── Menu Content (Inner container to allow clicks on buttons while backdrop handles clicks outside) ── */}
+                <div className="pointer-events-auto flex flex-col items-center gap-2 bg-background/95 backdrop-blur-md p-8 rounded-3xl border border-border/40 shadow-2xl">
+                  {NAV_ITEMS.map(({ id, label, icon: Icon }, index) => {
+                    const isActive = id === activeId
+                    return (
+                      <button
+                        key={id}
+                        // eslint-disable-next-line jsx-a11y/no-autofocus
+                        autoFocus={index === 0}
+                        onClick={() => { scrollTo(id); setMobileOpen(false) }}
+                        className={[
+                          'flex items-center gap-3 px-8 py-3.5 rounded-xl text-lg font-medium w-52',
+                          'transition-all duration-200 cursor-pointer',
+                          isActive
+                            ? 'text-foreground bg-primary/8'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/40',
+                        ].join(' ')}
+                      >
+                        <Icon
+                          size={20}
+                          strokeWidth={1.75}
+                          className={isActive ? 'text-primary [filter:drop-shadow(0_0_5px_var(--glow-secondary))]' : ''}
+                        />
+                        {label}
+                      </button>
+                    )
+                  })}
+                </div>
+              </motion.nav>
+            </>
           )}
         </AnimatePresence>
       </>

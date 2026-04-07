@@ -5,7 +5,7 @@ import { KeyboardEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Building2, Globe, Lock, ExternalLink } from 'lucide-react'
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/lib/button-variants'
 import { StatusBadge } from '@/components/ui/StatusBadge'
 import { cn } from '@/lib/utils'
 
@@ -57,7 +57,7 @@ export function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="px-4 md:px-8 lg:px-12 py-10 overflow-hidden">
+    <section id="projects" className="px-4 md:px-8 lg:px-12 py-16 md:py-24 overflow-hidden">
       <div className="flex flex-col gap-4 py-1">
         {PROJECTS.map(({ icon: Icon, hue, title, slug, description, tags, status, image, alt, url, caseStudySlug }, index) => {
           return (
@@ -128,7 +128,7 @@ export function ProjectsSection() {
                   </div>
 
                   {/* Right: screenshot */}
-                  <div className="w-full md:w-[38%] shrink-0 border-t md:border-t-0 md:border-l border-border/40 relative overflow-hidden bg-muted/5 min-h-[200px] md:min-h-[230px]">
+                  <div className="w-full md:w-[42%] lg:w-[38%] shrink-0 border-t md:border-t-0 md:border-l border-border/40 relative overflow-hidden bg-muted/5 min-h-[200px] md:min-h-[230px]">
                     {image ? (
                       <motion.div
                         className="absolute inset-0"

@@ -7,7 +7,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col min-h-[90vh] justify-center"
+      className="relative flex flex-col min-h-[90vh] justify-center overflow-hidden"
       style={{ backgroundImage: 'var(--gradient-hero)' }}
     >
       <div className="px-4 md:px-8 lg:px-12 flex flex-col lg:flex-row items-center gap-6 py-8">
@@ -115,6 +115,9 @@ export function HeroSection() {
               height={700}
               className="w-full h-auto"
               priority
+              // @ts-ignore - fetchPriority is supported in React 19/Next 15+
+              fetchPriority="high"
+              sizes="(max-width: 1024px) 100vw, 45vw"
             />
           </motion.div>
 

@@ -22,11 +22,24 @@ export const getnif: CaseStudy = {
   architectureDiagram: '/images/nif_architecture_svg.svg',
   architectureCaption:
     'Four-layer architecture: UI → Server Actions → Repositories → PostgreSQL. A separate Services layer handles email and payments with no framework imports, making both callable from Server Actions and the Stripe webhook handler alike.',
+  architecturePoints: [
+    'Components never touch the database directly — prevents scattered queries and missed security checks',
+    'Repositories are the single source of truth for all queries — change a query once, every caller benefits',
+    'Services are pure functions with no Next.js imports — the same email or payment logic works in a Server Action and in the Stripe webhook handler without modification',
+    'Drizzle ORM keeps TypeScript types and the schema in sync — rename a column and every callsite shows a compile error, not a runtime bug in production',
+  ],
   challenges: [
     {
       title: 'Stripe webhooks can arrive more than once',
       description:
         "Stripe's delivery guarantee is at-least-once, not exactly-once. Under concurrent Vercel invocations, two workers could receive the same `checkout.session.completed` event simultaneously and both attempt to confirm the same order — doubling emails and corrupting order state.",
+      points: [
+        'The Stripe redirect URL cannot be trusted — anyone can visit a success URL manually. The webhook is signed by Stripe\'s servers and is the only reliable confirmation of payment',
+        'The handler verifies the Stripe signature first — unsigned or tampered requests are rejected before any database work happens',
+        'Idempotency guard: an atomic insert with ON CONFLICT DO NOTHING returns 0 rows if another worker already claimed the event — exit immediately',
+        'Status guard: the order must still be pending_payment before any transition fires — catches any duplicate that slips past the first guard',
+        'Amount validation: the amount paid is compared against the expected price map — any mismatch halts the handler rather than confirming a discounted order',
+      ],
       resolution:
         'Two independent guards in sequence. First: an atomic `INSERT INTO processed_webhook_events ON CONFLICT DO NOTHING` — if it returns 0 rows, the event was already handled, exit immediately. Second: a status guard — the order must still be `pending_payment` before any transition fires. This catches anything that slips past the first guard.',
       diagram: '/images/nif_payment_svg.svg',
@@ -35,6 +48,13 @@ export const getnif: CaseStudy = {
       title: 'Gemini cannot access private Supabase URLs',
       description:
         'Documents are stored in a private Supabase Storage bucket. Passing the storage URL directly to the Gemini API fails — Gemini is an external Google service with no Supabase credentials, so every request returns a 403.',
+      points: [
+        'A 120-second signed download URL is generated via the admin Supabase client, which bypasses RLS — safe for internal server operations, never exposed to the browser',
+        'The server downloads the file bytes and sends them as base64 — Gemini receives the content directly, with no dependency on Supabase credentials',
+        'Gemini returns structured JSON: is the document type correct? does the name match? is it expired? are there visible issues?',
+        'The result — approved, flagged, or error — is saved per document; flagged and errored documents are queued for manual admin review',
+        'Soft-failure design: any error — network, bad JSON, missing API key — saves an error status instead of throwing, so a Gemini outage never blocks customers from submitting',
+      ],
       resolution:
         'The server generates a 120-second signed download URL via the admin Supabase client (which bypasses RLS), downloads the file bytes server-side, and forwards them as base64. Every failure path in the AI service returns `status: "error"` instead of throwing — a Gemini outage never blocks document submission.',
       diagram: '/images/nif_gemini_svg.svg',

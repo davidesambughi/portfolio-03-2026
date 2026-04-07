@@ -9,8 +9,9 @@ export type Decision = {
 export type Challenge = {
   title: string
   description: string
+  points?: string[]   // optional bullets expanding the description
   resolution: string
-  diagram?: string  // optional path to a supporting diagram
+  diagram?: string    // optional path to a supporting diagram
 }
 
 export type CaseStudy = {
@@ -28,6 +29,7 @@ export type CaseStudy = {
   }
   architectureDiagram: string | null  // null = show placeholder
   architectureCaption: string
+  architecturePoints?: string[]       // optional bullet points below caption
   challenges: Challenge[]             // rendered before decisions
   decisions: Decision[]
   reflection: string

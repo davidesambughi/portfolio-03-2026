@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/lib/button-variants'
 import { cn } from '@/lib/utils'
 import { sendEmail } from '@/app/actions/send-email'
 
@@ -23,6 +23,7 @@ export function ContactSection() {
   const [isPending, startTransition] = useTransition()
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({})
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -31,6 +32,7 @@ export function ContactSection() {
 
     setStatus('idle')
     setErrorMsg(null)
+    setFieldErrors({})
 
     startTransition(async () => {
       const result = await sendEmail(formData)
@@ -42,12 +44,25 @@ export function ContactSection() {
       } else {
         setStatus('error')
         setErrorMsg(result.error || "Something went wrong.")
+        if (result.errors) {
+          setFieldErrors(result.errors as Record<string, string[]>)
+        }
       }
     })
   }
 
+  const clearFieldError = (name: string) => {
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => {
+        const next = { ...prev }
+        delete next[name]
+        return next
+      })
+    }
+  }
+
   return (
-    <section id="contact" className="px-4 md:px-8 lg:px-12 py-20" aria-labelledby="contact-title">
+    <section id="contact" className="px-4 md:px-8 lg:px-12 py-16 md:py-24" aria-labelledby="contact-title">
       <h2 id="contact-title" className="sr-only">Contact Me</h2>
 
       <div className="max-w-4xl">
@@ -59,60 +74,90 @@ export function ContactSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="name" className="sr-only">Name</label>
-              <div className="rounded-xl p-[1px] overflow-hidden" style={{ backgroundImage: 'var(--gradient-brand-h)' }}>
+              <div 
+                className={cn(
+                  "rounded-xl p-[1px] overflow-hidden transition-all duration-200",
+                  fieldErrors.name ? "bg-red-500/50" : "bg-[var(--gradient-brand-h)]"
+                )}
+              >
                 <input
                   type="text"
                   id="name"
                   name="name"
                   placeholder="Name"
                   disabled={isPending}
+                  onChange={() => clearFieldError('name')}
                   className={cn(
                     "w-full block px-4 py-3 rounded-[11px] bg-card/90 outline-none transition-all duration-200",
                     "focus:bg-card placeholder:text-muted-foreground/40",
-                    isPending && "opacity-50 cursor-not-allowed"
+                    isPending && "opacity-50 cursor-not-allowed",
+                    fieldErrors.name && "text-red-400"
                   )}
                   required
                 />
               </div>
+              {fieldErrors.name && (
+                <p className="text-xs text-red-400 px-1">{fieldErrors.name[0]}</p>
+              )}
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="sr-only">Email</label>
-              <div className="rounded-xl p-[1px] overflow-hidden" style={{ backgroundImage: 'var(--gradient-brand-h)' }}>
+              <div 
+                className={cn(
+                  "rounded-xl p-[1px] overflow-hidden transition-all duration-200",
+                  fieldErrors.email ? "bg-red-500/50" : "bg-[var(--gradient-brand-h)]"
+                )}
+              >
                 <input
                   type="email"
                   id="email"
                   name="email"
                   placeholder="Email"
                   disabled={isPending}
+                  onChange={() => clearFieldError('email')}
                   className={cn(
                     "w-full block px-4 py-3 rounded-[11px] bg-card/90 outline-none transition-all duration-200",
                     "focus:bg-card placeholder:text-muted-foreground/40",
-                    isPending && "opacity-50 cursor-not-allowed"
+                    isPending && "opacity-50 cursor-not-allowed",
+                    fieldErrors.email && "text-red-400"
                   )}
                   required
                 />
               </div>
+              {fieldErrors.email && (
+                <p className="text-xs text-red-400 px-1">{fieldErrors.email[0]}</p>
+              )}
             </div>
           </div>
 
           {/* ── Middle Row: Message ── */}
           <div className="space-y-2">
             <label htmlFor="message" className="sr-only">Message</label>
-            <div className="rounded-xl p-[1px] overflow-hidden" style={{ backgroundImage: 'var(--gradient-brand-h)' }}>
+            <div 
+              className={cn(
+                "rounded-xl p-[1px] overflow-hidden transition-all duration-200",
+                fieldErrors.message ? "bg-red-500/50" : "bg-[var(--gradient-brand-h)]"
+              )}
+            >
               <textarea
                 id="message"
                 name="message"
                 placeholder="Your message..."
                 rows={6}
                 disabled={isPending}
+                onChange={() => clearFieldError('message')}
                 className={cn(
                   "w-full block px-4 py-3 rounded-[11px] bg-card/90 outline-none transition-all duration-200 resize-none",
                   "focus:bg-card placeholder:text-muted-foreground/40",
-                  isPending && "opacity-50 cursor-not-allowed"
+                  isPending && "opacity-50 cursor-not-allowed",
+                  fieldErrors.message && "text-red-400"
                 )}
                 required
               />
             </div>
+            {fieldErrors.message && (
+              <p className="text-xs text-red-400 px-1">{fieldErrors.message[0]}</p>
+            )}
           </div>
 
           {/* ── Honeypot — hidden from humans, visible to bots ── */}

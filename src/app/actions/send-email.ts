@@ -33,7 +33,10 @@ export async function sendEmail(formData: FormData) {
   })
 
   if (!validatedFields.success) {
-    return { error: "Invalid form data. Please check your inputs." }
+    return { 
+      errors: validatedFields.error.flatten().fieldErrors,
+      error: "Invalid form data. Please check your inputs." 
+    }
   }
 
   const { name, email, message } = validatedFields.data

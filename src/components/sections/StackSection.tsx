@@ -37,7 +37,7 @@ const STACK_DATA = [
 
 export function StackSection() {
   return (
-    <section id="stack" className="px-4 md:px-8 lg:px-12 py-10" aria-labelledby="stack-title">
+    <section id="stack" className="px-4 md:px-8 lg:px-12 py-16 md:py-24" aria-labelledby="stack-title">
       {/* Hidden heading for SEO/Accessibility */}
       <h2 id="stack-title" className="sr-only">Tech Stack & Methodology</h2>
 
