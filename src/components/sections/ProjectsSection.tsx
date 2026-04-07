@@ -1,10 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, KeyboardEvent } from 'react'
+import { KeyboardEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Building2, Globe, Lock, ExternalLink } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
+import { StatusBadge } from '@/components/ui/StatusBadge'
 import { cn } from '@/lib/utils'
 
 const PROJECTS = [
@@ -14,7 +16,7 @@ const PROJECTS = [
     title: 'GetNIF Portugal',
     slug: 'getnifportugal.com',
     image: '/images/getNifPortugal.png',
-    url: 'https://nif-saas-nextjs16.vercel.app/en',
+    caseStudySlug: 'getnif',
     alt: 'Screenshot of GetNIF Portugal platform',
     description:
       'SaaS platform to obtain a Portuguese NIF remotely — Stripe checkout, signed document uploads, realtime admin dashboard, and trilingual support (EN/PT/FR). No Portugal visit required.',
@@ -36,70 +38,47 @@ const PROJECTS = [
   },
 ]
 
-const STATUS_STYLES = {
-  LIVE:    { dot: 'bg-emerald-500', badge: 'border-emerald-500/40 text-emerald-500 bg-emerald-500/6' },
-  WIP:     { dot: 'bg-amber-500',   badge: 'border-amber-500/40 text-amber-500 bg-amber-500/6' },
-  SHIPPED: { dot: 'bg-cyan-500',    badge: 'border-cyan-500/40 text-cyan-500 bg-cyan-500/6' },
-}
-
-function StatusBadge({ status }: { status: keyof typeof STATUS_STYLES }) {
-  const { dot, badge } = STATUS_STYLES[status]
-  return (
-    <span className={['inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full', 'text-[10px] font-semibold tracking-widest uppercase border shrink-0', badge].join(' ')}>
-      <span className={['w-1.5 h-1.5 rounded-full', dot].join(' ')} />
-      {status}
-    </span>
-  )
-}
-
 export function ProjectsSection() {
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const router = useRouter()
 
-  const handleAction = (title: string, url?: string) => {
-    if (!url) {
-      setSelectedId(prev => prev === title ? null : title)
+  const handleAction = (url?: string, caseStudySlug?: string) => {
+    if (caseStudySlug) {
+      router.push(`/case-studies/${caseStudySlug}`)
       return
     }
-    window.open(url, '_blank', 'noopener,noreferrer')
+    if (url) window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  const handleKeyDown = (e: KeyboardEvent, title: string, url?: string) => {
+  const handleKeyDown = (e: KeyboardEvent, url?: string, caseStudySlug?: string) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      handleAction(title, url)
+      handleAction(url, caseStudySlug)
     }
   }
 
   return (
     <section id="projects" className="px-4 md:px-8 lg:px-12 py-10 overflow-hidden">
       <div className="flex flex-col gap-4 py-1">
-        {PROJECTS.map(({ icon: Icon, hue, title, slug, description, tags, status, image, alt, url }, index) => {
-          const isSelected = selectedId === title
+        {PROJECTS.map(({ icon: Icon, hue, title, slug, description, tags, status, image, alt, url, caseStudySlug }, index) => {
           return (
             <motion.div
               key={title}
               role="button"
               tabIndex={0}
               aria-label={title}
-              aria-pressed={isSelected}
-              onClick={() => handleAction(title, url)}
-              onKeyDown={(e) => handleKeyDown(e, title, url)}
+              onClick={() => handleAction(url, caseStudySlug)}
+              onKeyDown={(e) => handleKeyDown(e, url, caseStudySlug)}
               whileHover={{ scale: 1.01 }}
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               className={cn(
                 "group rounded-2xl overflow-hidden cursor-pointer outline-none transition-all duration-300",
                 "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                 "border dark:border-0 dark:p-[1px]",
-                isSelected
-                  ? "border-primary/35 shadow-[0_0_40px_-10px_var(--glow-primary)]"
-                  : "border-primary/15 hover:border-primary/30 hover:shadow-[0_0_30px_-12px_var(--glow-primary)]"
+                "border-primary/15 hover:border-primary/30 hover:shadow-[0_0_30px_-12px_var(--glow-primary)]",
               )}
               style={{ backgroundImage: 'var(--project-card-border)' }}
             >
-              <div className={cn(
-                "rounded-2xl dark:rounded-[15px] overflow-hidden bg-card/95 h-full transition-all duration-300",
-                isSelected ? "bg-card" : "group-hover:bg-card"
-              )}>
+              <div className="rounded-2xl dark:rounded-[15px] overflow-hidden bg-card/95 h-full transition-all duration-300 group-hover:bg-card">
                 {/* ── Browser chrome header ── */}
                 <div className="flex items-center gap-3 px-4 py-2.5 border-b border-border/40 bg-muted/30">
                   <div className="flex items-center gap-1.5 shrink-0">
@@ -127,7 +106,7 @@ export function ProjectsSection() {
                       </span>
                       <h3 className="font-semibold text-base text-foreground leading-tight group-hover:text-primary transition-colors duration-200 flex items-center gap-2">
                         {title}
-                        {url && (
+                        {url && !caseStudySlug && (
                           <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                         )}
                       </h3>

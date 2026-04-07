@@ -11,7 +11,7 @@ export default function Home() {
       <HeroSection />
       <SectionDivider label="Selected Work" />
       <ProjectsSection />
-      
+
       <SectionDivider label="Tech Stack" />
       <StackSection />
 

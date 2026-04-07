@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run dev      # start dev server at localhost:3000
 npm run build    # production build
+npm run start    # serve the production build locally
 npm run lint     # ESLint
 ```
 
@@ -24,9 +25,9 @@ Single-page portfolio built with **Next.js 16** (App Router) + **React 19** + **
 
 **Layout shell** — `src/app/layout.tsx`:
 - `<Providers>` — `next-themes` ThemeProvider (default: dark, `attribute="class"`)
-- `<Sidebar>` — fixed left nav, 56 px collapsed / 220 px expanded, smooth-scrolls to sections, tracks active section via `IntersectionObserver`
+- `<Sidebar>` — fixed left nav (desktop only, `hidden md:flex`), 56 px collapsed / 220 px expanded, smooth-scrolls to sections, tracks active section via `IntersectionObserver`. On mobile, replaced by a hamburger button + full-screen overlay nav (Escape closes it, body scroll is locked while open).
 - `<ThemeToggle>` — fixed top-right
-- `div.flex-1.pl-14` — content area (pl-14 = 56 px = collapsed sidebar width)
+- `div.flex-1.md:pl-14` — content area (`md:pl-14` = 56 px sidebar offset, no padding on mobile)
 
 **Components** — `src/components/`:
 - `layout/` — Sidebar, ThemeToggle, Providers (all `'use client'`)
@@ -40,6 +41,7 @@ Single-page portfolio built with **Next.js 16** (App Router) + **React 19** + **
 **Key utilities & libraries**:
 - `cn()` — `src/lib/utils.ts`, clsx + tailwind-merge, use for all conditional classNames
 - `cva()` — `class-variance-authority`, use for component variants (installed, not `cn`)
+- `zod` — schema validation; used in the contact form Server Action (`send-email.ts`)
 - `lucide-react` — icon library; import icons directly from it
 - `@base-ui/react` — unstyled UI primitives (use over raw HTML for accessible interactive elements)
 - `tw-animate-css` — animation utility classes available via Tailwind
@@ -72,6 +74,8 @@ Push `'use client'` as far down the tree as possible — wrap only the interacti
 `globals.css` defines two token layers. Always use semantic tokens in components; reach for palette primitives only when no semantic token fits.
 
 **Palette primitives** (OKLCH): `--violet-*`, `--electric-*`, `--amber-*`, `--emerald-*`, `--coral-*`, `--cyan-*`, `--neutral-*` (50–1000).
+
+**Sidebar tokens** — used only in `Sidebar.tsx`; do not use elsewhere: `--sidebar`, `--sidebar-foreground`, `--sidebar-primary`, `--sidebar-border`, `--sidebar-accent`. Gradient `--gradient-brand-v` (vertical variant of `--gradient-brand`) is also sidebar-only.
 
 **Semantic tokens** (auto-switch light/dark):
 
@@ -121,7 +125,7 @@ Config is CSS-first via `@theme inline` in `globals.css` — no `tailwind.config
 - **Comments** — English only. Only comment where logic isn't self-evident. Section headers use `{/* ── Label ── */}`.
 - **Sections** — each section gets its own file in `src/components/sections/`. The section component owns its `id`, padding, and background. `SectionDivider` is placed between sections in `page.tsx`.
 - **New sections** — must add a matching entry to `NAV_ITEMS` in `Sidebar.tsx`.
-- **Sidebar sync** — `SIDEBAR_COLLAPSED = 56px` in `Sidebar.tsx` must match `pl-14` in `layout.tsx`.
+- **Sidebar sync** — `SIDEBAR_COLLAPSED = 56px` in `Sidebar.tsx` must match `md:pl-14` in `layout.tsx`.
 - **No one-off abstractions** — don't create helpers for things used once. Shared primitives go in `src/components/ui/`.
 - **Images** — use `next/image` with explicit `width`/`height` or `fill` + `sizes`. Never raw `<img>`.
 
