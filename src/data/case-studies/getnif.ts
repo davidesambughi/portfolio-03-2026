@@ -19,7 +19,7 @@ export const getnif: CaseStudy = {
       'Users across three countries and three languages (EN / PT / FR)',
     ],
   },
-  architectureDiagram: null,
+  architectureDiagram: '/images/nif_architecture_svg.svg',
   architectureCaption:
     'Four-layer architecture: UI → Server Actions → Repositories → PostgreSQL. A separate Services layer handles email and payments with no framework imports, making both callable from Server Actions and the Stripe webhook handler alike.',
   challenges: [
@@ -29,6 +29,7 @@ export const getnif: CaseStudy = {
         "Stripe's delivery guarantee is at-least-once, not exactly-once. Under concurrent Vercel invocations, two workers could receive the same `checkout.session.completed` event simultaneously and both attempt to confirm the same order — doubling emails and corrupting order state.",
       resolution:
         'Two independent guards in sequence. First: an atomic `INSERT INTO processed_webhook_events ON CONFLICT DO NOTHING` — if it returns 0 rows, the event was already handled, exit immediately. Second: a status guard — the order must still be `pending_payment` before any transition fires. This catches anything that slips past the first guard.',
+      diagram: '/images/nif_payment_svg.svg',
     },
     {
       title: 'Gemini cannot access private Supabase URLs',
@@ -36,6 +37,7 @@ export const getnif: CaseStudy = {
         'Documents are stored in a private Supabase Storage bucket. Passing the storage URL directly to the Gemini API fails — Gemini is an external Google service with no Supabase credentials, so every request returns a 403.',
       resolution:
         'The server generates a 120-second signed download URL via the admin Supabase client (which bypasses RLS), downloads the file bytes server-side, and forwards them as base64. Every failure path in the AI service returns `status: "error"` instead of throwing — a Gemini outage never blocks document submission.',
+      diagram: '/images/nif_gemini_svg.svg',
     },
   ],
   decisions: [

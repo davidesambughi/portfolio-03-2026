@@ -10,6 +10,7 @@ export type Challenge = {
   title: string
   description: string
   resolution: string
+  diagram?: string  // optional path to a supporting diagram
 }
 
 export type CaseStudy = {

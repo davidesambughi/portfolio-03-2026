@@ -39,7 +39,7 @@ function SectionHeader({ title }: { title: string }) {
 
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
   return (
-    <main id="main" className="max-w-2xl mx-auto px-4 md:px-6 py-10 pb-24">
+    <main id="main" className="max-w-6xl mx-auto px-4 md:px-8 py-10 pb-24">
 
       {/* ── Back link ── */}
       <Link
@@ -53,39 +53,36 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         Portfolio
       </Link>
 
-      {/* ── Hero ── */}
-      <section>
-        <div className="flex flex-wrap items-start gap-3 mb-2">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">{study.title}</h1>
-          <StatusBadge status={study.status} />
-        </div>
-
-        <p className="text-muted-foreground leading-relaxed mb-5">{study.pitch}</p>
-
-        <div className="flex flex-wrap items-center gap-2 mb-7">
-          {study.tags.map(tag => (
-            <span
-              key={tag}
-              className={cn(
-                buttonVariants({ variant: 'outline', size: 'xs' }),
-                'rounded-full border-border/60 text-muted-foreground pointer-events-none',
-              )}
+      {/* ── Hero: text left (1fr), screenshot right (2fr) ── */}
+      <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-10 md:items-start">
+        <div>
+          <div className="flex flex-wrap items-start gap-3 mb-2">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">{study.title}</h1>
+            <StatusBadge status={study.status} />
+          </div>
+          <p className="text-muted-foreground leading-relaxed mb-5">{study.pitch}</p>
+          <div className="flex flex-wrap gap-2">
+            {study.tags.map(tag => (
+              <span
+                key={tag}
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'xs' }),
+                  'rounded-full border-border/60 text-muted-foreground pointer-events-none',
+                )}
+              >
+                {tag}
+              </span>
+            ))}
+            <a
+              href={study.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'gap-1.5')}
             >
-              {tag}
-            </span>
-          ))}
-          <a
-            href={study.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              buttonVariants({ variant: 'outline', size: 'sm' }),
-              'ml-auto gap-1.5',
-            )}
-          >
-            View live site
-            <ExternalLink size={12} />
-          </a>
+              View live site
+              <ExternalLink size={12} />
+            </a>
+          </div>
         </div>
 
         <div className="rounded-xl overflow-hidden border border-border/50 bg-muted/10">
@@ -144,16 +141,34 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         <SectionHeader title="Engineering Challenges" />
         <div className="space-y-3">
           {study.challenges.map((challenge, i) => (
-            <div
-              key={i}
-              className="rounded-xl border border-border/50 bg-card p-5"
-            >
-              <h3 className="text-sm font-semibold text-foreground mb-2">
-                {challenge.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                <InlineCode text={challenge.description} />
-              </p>
+            <div key={i} className="rounded-xl border border-border/50 bg-card p-5">
+
+              {/* Text left, diagram right on md+ — stacked on mobile */}
+              <div className={cn(
+                'mb-4',
+                challenge.diagram && 'grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6',
+              )}>
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground mb-2">
+                    {challenge.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    <InlineCode text={challenge.description} />
+                  </p>
+                </div>
+                {challenge.diagram && (
+                  <div className="rounded-lg overflow-hidden border border-border/40 bg-muted/10">
+                    <Image
+                      src={challenge.diagram}
+                      alt={`Diagram: ${challenge.title}`}
+                      width={600}
+                      height={400}
+                      className="w-full object-contain"
+                    />
+                  </div>
+                )}
+              </div>
+
               <div className="border-t border-border/40 pt-4">
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   <span className="font-medium text-primary mr-1.5">Resolution —</span>
@@ -170,10 +185,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         <SectionHeader title="Key Decisions" />
         <div className="space-y-3">
           {study.decisions.map((decision, i) => (
-            <div
-              key={i}
-              className="rounded-xl border border-border/50 bg-card p-5"
-            >
+            <div key={i} className="rounded-xl border border-border/50 bg-card p-5">
               <p className="text-sm text-muted-foreground mb-1">Chose</p>
               <p className="text-sm font-semibold text-foreground mb-3">
                 <InlineCode text={decision.chosen} />
