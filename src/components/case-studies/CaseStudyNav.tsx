@@ -58,7 +58,7 @@ export function CaseStudyNav() {
       className={cn(
         'fixed right-6 top-1/2 z-40',
         '-translate-y-1/2',
-        'hidden lg:flex flex-col items-end gap-1',
+        'hidden lg:flex flex-col items-end gap-2',
         'transition-all duration-300',
         visible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3 pointer-events-none',
       )}
@@ -70,16 +70,16 @@ export function CaseStudyNav() {
             key={id}
             onClick={() => scrollTo(id)}
             className={cn(
-              'flex items-center gap-2.5 py-1 cursor-pointer transition-all duration-200',
+              'flex items-center gap-3.5 py-1.5 cursor-pointer transition-all duration-200',
               isActive
                 ? 'text-foreground'
                 : 'text-muted-foreground/40 hover:text-muted-foreground/70',
             )}
           >
-            <span className="text-xs font-medium">{label}</span>
+            <span className="text-sm font-medium">{label}</span>
             <span className={cn(
-              'h-1.5 rounded-full shrink-0 transition-all duration-300',
-              isActive ? 'w-4 bg-primary' : 'w-1.5 bg-border',
+              'h-2 rounded-full shrink-0 transition-all duration-300',
+              isActive ? 'w-5 bg-primary' : 'w-2 bg-border',
             )} />
           </button>
         )
@@ -90,8 +90,8 @@ export function CaseStudyNav() {
           onClick={scrollToTop}
           className="flex items-center gap-2 py-1 cursor-pointer text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors duration-200"
         >
-          <span className="text-xs">Top</span>
-          <ArrowUp size={11} className="shrink-0" />
+          <span className="text-sm">Top</span>
+          <ArrowUp size={14} className="shrink-0" />
         </button>
       </div>
     </nav>

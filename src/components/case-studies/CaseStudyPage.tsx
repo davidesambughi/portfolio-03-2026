@@ -119,7 +119,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         {/* ── Architecture ── */}
         <section id="architecture" className="mt-14">
           <SectionHeader title="Architecture" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 md:items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[3fr_4fr] gap-6 md:gap-8 md:items-center">
             <div className="space-y-4">
               <p className="text-base text-muted-foreground leading-relaxed">
                 {study.architectureCaption}
