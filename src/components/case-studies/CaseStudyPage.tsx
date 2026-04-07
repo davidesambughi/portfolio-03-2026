@@ -30,9 +30,12 @@ function InlineCode({ text }: { text: string }) {
 
 function SectionHeader({ title }: { title: string }) {
   return (
-    <h2 className="text-[10px] font-semibold tracking-widest uppercase text-muted-foreground/50 mb-5">
-      {title}
-    </h2>
+    <div className="relative flex items-center mb-5">
+      <h2 className="relative z-10 pr-4 bg-background text-[10px] font-semibold tracking-[0.2em] uppercase text-muted-foreground/50 dark:text-primary/70">
+        {title}
+      </h2>
+      <div className="flex-1 h-px" style={{ backgroundImage: 'var(--gradient-brand-h)' }} />
+    </div>
   )
 }
 
@@ -76,19 +79,22 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                   {tag}
                 </span>
               ))}
+              {/* ── Live site button — gradient brand ── */}
               <a
                 href={study.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'gap-1.5')}
+                className="group flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-semibold text-white transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]"
+                style={{ backgroundImage: 'var(--gradient-brand)' }}
               >
                 View live site
-                <ExternalLink size={12} />
+                <ExternalLink size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
             </div>
           </div>
 
-          <div className="rounded-xl overflow-hidden border border-border/50 bg-muted/10">
+          {/* ── Hero screenshot — glow border ── */}
+          <div className="rounded-xl overflow-hidden border border-primary/20 shadow-[0_0_32px_-8px_var(--glow-primary)] bg-muted/10">
             <Image
               src={study.screenshot}
               alt={study.screenshotAlt}
@@ -136,7 +142,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
               )}
             </div>
             {study.architectureDiagram ? (
-              <div className="rounded-xl overflow-hidden border border-border/40 bg-muted/10">
+              <div className="rounded-xl overflow-hidden border border-primary/20 shadow-[0_0_28px_-8px_var(--glow-primary)] bg-muted/10">
                 <Image
                   src={study.architectureDiagram}
                   alt="Architecture diagram"
@@ -160,49 +166,56 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
           <SectionHeader title="Engineering Challenges" />
           <div className="space-y-3">
             {study.challenges.map((challenge, i) => (
-              <div key={i} className="rounded-xl border border-border/50 bg-card p-5">
+              // Gradient border wrapper — same pattern as project cards
+              <div
+                key={i}
+                className="rounded-xl border dark:border-0 dark:p-[1px] border-border/50 transition-shadow duration-300 hover:shadow-[0_0_28px_-8px_var(--glow-primary)]"
+                style={{ backgroundImage: 'var(--project-card-border)' }}
+              >
+                <div className="rounded-xl dark:rounded-[11px] bg-card p-5">
 
-                {/* Text left, diagram right on md+ — stacked on mobile */}
-                <div className={cn(
-                  'mb-4',
-                  challenge.diagram && 'grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6',
-                )}>
-                  <div className="space-y-3">
-                    <h3 className="text-base font-semibold text-foreground">
-                      {challenge.title}
-                    </h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                      <InlineCode text={challenge.description} />
-                    </p>
-                    {challenge.points && (
-                      <ul className="space-y-2.5">
-                        {challenge.points.map((point, j) => (
-                          <li key={j} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
-                            <span className="text-border/80 mt-0.5 shrink-0 select-none">—</span>
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  {/* Text left, diagram right on md+ — stacked on mobile */}
+                  <div className={cn(
+                    'mb-4',
+                    challenge.diagram && 'grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6',
+                  )}>
+                    <div className="space-y-3">
+                      <h3 className="text-base font-semibold text-foreground">
+                        {challenge.title}
+                      </h3>
+                      <p className="text-base text-muted-foreground leading-relaxed">
+                        <InlineCode text={challenge.description} />
+                      </p>
+                      {challenge.points && (
+                        <ul className="space-y-2.5">
+                          {challenge.points.map((point, j) => (
+                            <li key={j} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
+                              <span className="text-border/80 mt-0.5 shrink-0 select-none">—</span>
+                              <span>{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    {challenge.diagram && (
+                      <div className="rounded-lg overflow-hidden border border-border/40 bg-muted/10 self-center">
+                        <Image
+                          src={challenge.diagram}
+                          alt={`Diagram: ${challenge.title}`}
+                          width={600}
+                          height={400}
+                          className="w-full object-contain"
+                        />
+                      </div>
                     )}
                   </div>
-                  {challenge.diagram && (
-                    <div className="rounded-lg overflow-hidden border border-border/40 bg-muted/10 self-center">
-                      <Image
-                        src={challenge.diagram}
-                        alt={`Diagram: ${challenge.title}`}
-                        width={600}
-                        height={400}
-                        className="w-full object-contain"
-                      />
-                    </div>
-                  )}
-                </div>
 
-                <div className="border-t border-border/40 pt-4">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    <span className="font-medium text-primary mr-1.5">Resolution —</span>
-                    <InlineCode text={challenge.resolution} />
-                  </p>
+                  <div className="border-t border-border/40 pt-4">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      <span className="font-medium text-primary mr-1.5">Resolution —</span>
+                      <InlineCode text={challenge.resolution} />
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -214,32 +227,39 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
           <SectionHeader title="Key Decisions" />
           <div className="space-y-3">
             {study.decisions.map((decision, i) => (
-              <div key={i} className="rounded-xl border border-border/50 bg-card p-5">
-                <p className="text-sm text-muted-foreground mb-1">Chose</p>
-                <p className="text-sm font-semibold text-foreground mb-3">
-                  <InlineCode text={decision.chosen} />
-                </p>
-                <div className="flex flex-wrap items-center gap-1.5 mb-4">
-                  <span className="text-[11px] text-muted-foreground/50 mr-0.5">
-                    Considered:
-                  </span>
-                  {decision.alternatives.map((alt, j) => (
-                    <span
-                      key={j}
-                      className={cn(
-                        buttonVariants({ variant: 'outline', size: 'xs' }),
-                        'rounded-full border-border/40 text-muted-foreground/60 pointer-events-none',
-                      )}
-                    >
-                      {alt}
-                    </span>
-                  ))}
-                </div>
-                <div className="border-t border-border/40 pt-4">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    <span className="font-medium text-primary mr-1.5">Why —</span>
-                    <InlineCode text={decision.rationale} />
+              // Gradient border wrapper — same pattern as project cards
+              <div
+                key={i}
+                className="rounded-xl border dark:border-0 dark:p-[1px] border-border/50 transition-shadow duration-300 hover:shadow-[0_0_28px_-8px_var(--glow-primary)]"
+                style={{ backgroundImage: 'var(--project-card-border)' }}
+              >
+                <div className="rounded-xl dark:rounded-[11px] bg-card p-5">
+                  <p className="text-sm text-muted-foreground mb-1">Chose</p>
+                  <p className="text-sm font-semibold text-foreground mb-3">
+                    <InlineCode text={decision.chosen} />
                   </p>
+                  <div className="flex flex-wrap items-center gap-1.5 mb-4">
+                    <span className="text-[11px] text-muted-foreground/50 mr-0.5">
+                      Considered:
+                    </span>
+                    {decision.alternatives.map((alt, j) => (
+                      <span
+                        key={j}
+                        className={cn(
+                          buttonVariants({ variant: 'outline', size: 'xs' }),
+                          'rounded-full border-border/40 text-muted-foreground/60 pointer-events-none',
+                        )}
+                      >
+                        {alt}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="border-t border-border/40 pt-4">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      <span className="font-medium text-primary mr-1.5">Why —</span>
+                      <InlineCode text={decision.rationale} />
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -255,7 +275,10 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         </section>
 
         {/* ── Footer nav ── */}
-        <div className="flex items-center justify-between pt-10 mt-14 border-t border-border/40">
+        <div className="mt-14 mb-0">
+          <div className="h-px w-full" style={{ backgroundImage: 'var(--gradient-brand-h)' }} />
+        </div>
+        <div className="flex items-center justify-between pt-10">
           <Link
             href="/#projects"
             className={cn(
@@ -270,10 +293,11 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
             href={study.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'gap-1.5')}
+            className="group flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]"
+            style={{ backgroundImage: 'var(--gradient-brand)' }}
           >
             View live site
-            <ExternalLink size={12} />
+            <ExternalLink size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
           </a>
         </div>
       </main>
